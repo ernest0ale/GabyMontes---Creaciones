@@ -2,18 +2,18 @@
 <html lang="es" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Catálogo artesanal – Tienda online para emprendimiento de manualidades</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Gavy Montez – Creaciones hechas a mano con Amor</title>
   
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   
-  <!-- Google Fonts: Playfair Display & Inter -->
+  <!-- Google Fonts: Playfair Display & Inter (elegancia artesanal) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
   
-  <!-- FontAwesome para iconos de alta calidad -->
+  <!-- FontAwesome 6 (iconos) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <script>
@@ -21,12 +21,12 @@
       theme: {
         extend: {
           colors: {
-            'art-bg': '#FDF8F0',       /* Crema cálido */
-            'art-text': '#4A3728',     /* Marrón oscuro */
-            'art-accent': '#C17A4D',   /* Terracota */
-            'art-secondary': '#8BAA7B',/* Verde oliva */
-            'art-border': '#E6D5B8',   /* Beige pálido */
-            'art-hover': '#B06B40',     /* Terracota más oscuro */
+            'art-bg': '#FDF8F0',       
+            'art-text': '#4A3728',     
+            'art-accent': '#C17A4D',   
+            'art-secondary': '#8BAA7B',
+            'art-border': '#E6D5B8',
+            'art-hover': '#B06B40',
           },
           fontFamily: {
             serif: ['"Playfair Display"', 'serif'],
@@ -46,7 +46,6 @@
     h1, h2, h3, .font-serif {
       font-family: 'Playfair Display', serif;
     }
-    /* Estilos personalizados para barra de desplazamiento en carrusel horizontal */
     .custom-scrollbar::-webkit-scrollbar {
       height: 6px;
     }
@@ -57,24 +56,28 @@
       background-color: #C17A4D;
       border-radius: 10px;
     }
+    /* Mejora accesibilidad botones */
+    button, .category-btn, .nav-btn {
+      transition: all 0.2s ease;
+    }
+    .line-clamp-2 {
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
   </style>
 </head>
 <body class="min-h-screen flex flex-col antialiased">
 
-  <!-- NOTAS DEL PROTOTIPO / BARRA DE INFORMACIÓN SUPERIOR -->
-  <div class="bg-art-accent text-white py-2 px-4 text-xs md:text-sm text-center font-medium shadow-sm flex flex-col md:flex-row justify-center items-center gap-2">
-    <span>💡 <strong>Modo Prototipo Interactivo:</strong> Navega entre páginas, filtra el catálogo o haz clic en los productos para ver los detalles y simular la compra.</span>
-    <button onclick="document.getElementById('prototipo-info-modal').classList.toggle('hidden')" class="bg-white text-art-accent px-2 py-0.5 rounded-full text-[10px] hover:bg-art-bg transition-colors font-bold uppercase tracking-wider ml-2">Ver Guía del Prototipo</button>
-  </div>
-
-  <!-- MENU SUPERIOR FIJO (STICKY NAV) -->
+  <!-- HEADER STICKY / REBRANDING: GAVY MONTEZ -->
   <header class="sticky top-0 z-40 bg-[#FDF8F0]/95 backdrop-blur-md border-b border-art-border shadow-sm">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
       
-      <!-- LOGO -->
+      <!-- LOGO con nueva identidad Gavy Montez -->
       <a href="#" onclick="showPage('home')" class="flex items-center gap-2 group">
-        <div class="w-10 h-10 rounded-full bg-art-accent flex items-center justify-center text-white text-xl font-serif">A</div>
-        <span class="text-xl md:text-2xl font-serif font-bold text-art-text tracking-wide transition-colors group-hover:text-art-accent">ArteManos</span>
+        <div class="w-10 h-10 rounded-full bg-art-accent flex items-center justify-center text-white text-xl font-serif">GM</div>
+        <span class="text-xl md:text-2xl font-serif font-bold text-art-text tracking-wide transition-colors group-hover:text-art-accent">Gavy Montez</span>
       </a>
 
       <!-- NAVEGACIÓN ESCRITORIO -->
@@ -84,14 +87,14 @@
         <button onclick="showPage('contacto')" id="nav-contacto" class="nav-btn text-art-text hover:text-art-accent font-medium text-base pb-1 border-b-2 border-transparent transition-colors">Contacto</button>
       </nav>
 
-      <!-- BOTÓN LLAMADO A LA ACCIÓN (Header) -->
+      <!-- CTA destacado -->
       <div class="hidden md:block">
         <button onclick="showPage('catalogo')" class="bg-art-secondary hover:bg-[#79986A] text-white px-5 py-2.5 rounded-full font-medium transition-transform active:scale-95 text-sm flex items-center gap-2">
-          <i class="fa-solid fa-basket-shopping"></i> Explorar Catálogo
+          <i class="fa-solid fa-basket-shopping"></i> Explorar colección
         </button>
       </div>
 
-      <!-- MENÚ MÓVIL (Hamburguesa) -->
+      <!-- MENÚ MÓVIL -->
       <div class="md:hidden flex items-center">
         <button onclick="toggleMobileMenu()" id="mobile-menu-btn" class="text-art-text hover:text-art-accent focus:outline-none p-2" aria-label="Abrir menú">
           <i class="fa-solid fa-bars text-2xl"></i>
@@ -112,893 +115,240 @@
     </div>
   </header>
 
-  <!-- CONTENIDO PRINCIPAL (GESTIONADO POR VISTAS JS) -->
   <main class="flex-grow">
 
-    <!-- ==================== PÁGINA 1: INICIO (HOME) ==================== -->
+    <!-- ==================== PÁGINA INICIO (HOME) ==================== -->
     <section id="page-home" class="page-view">
       
-      <!-- HERO SECTION -->
+      <!-- HERO con nuevo eslogan y estilo -->
       <div class="relative bg-[#EAE0D1] overflow-hidden py-16 md:py-24">
-        <!-- Decoraciones orgánicas de fondo -->
         <div class="absolute -top-12 -left-12 w-48 h-48 rounded-full bg-art-border opacity-30 blur-xl"></div>
         <div class="absolute bottom-0 right-10 w-72 h-72 rounded-full bg-art-secondary opacity-15 blur-2xl"></div>
         
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             
-            <!-- Texto del Hero -->
             <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
               <span class="inline-block text-art-accent uppercase tracking-widest text-xs md:text-sm font-bold bg-art-accent/10 px-3 py-1 rounded-full">
-                ✨ Hecho a mano con amor
+                ✨ Hecho a mano con amor ✨
               </span>
               <h1 class="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-art-text leading-tight">
-                Arte con manos que <span class="italic text-art-accent underline decoration-art-border">tejen historias</span>
+                <span class="italic text-art-accent underline decoration-art-border">Gavy Montez</span><br>Creaciones hechas a mano con Amor
               </h1>
               <p class="text-lg md:text-xl text-art-text/80 max-w-xl mx-auto lg:mx-0 font-light leading-relaxed">
-                Pulseras, atrapasueños, sombreros universitarios y esculturas pintadas a mano. Cada pieza es única, diseñada para llevar magia a tu vida diaria.
+                Pulseras, atrapasueños, sombreros y esculturas pintadas. Cada pieza es única, tejida y moldeada con esencia caribeña desde La Habana.
               </p>
               
-              <!-- Botones del Hero -->
               <div class="pt-4 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                 <button onclick="showPage('catalogo')" class="bg-art-accent hover:bg-art-hover text-white text-base font-semibold px-8 py-4 rounded-full transition-all duration-300 transform hover:-translate-y-0.5 shadow-lg shadow-art-accent/20 flex items-center justify-center gap-2">
-                  Ver catálogo completo <i class="fa-solid fa-arrow-right"></i>
+                  Ver colección <i class="fa-solid fa-arrow-right"></i>
                 </button>
                 <button onclick="scrollToFeatured()" class="bg-transparent border-2 border-art-text/20 hover:border-art-accent text-art-text hover:text-art-accent text-base font-medium px-6 py-4 rounded-full transition-all duration-300">
                   Conocer más
                 </button>
               </div>
-
-              <!-- Indicación Prototipo -->
               <p class="text-xs text-art-text/50 italic pt-2">
-                * Prototipo: Haz clic en "Ver catálogo completo" para navegar interactivamente.
+                * Prototipo: Explora cada categoría y contacta por WhatsApp.
               </p>
             </div>
 
-            <!-- Imagen del Hero (Estilo artesana trabajando) -->
+            <!-- Imagen Hero Artesanal -->
             <div class="lg:col-span-5 relative">
               <div class="relative mx-auto max-w-[400px] lg:max-w-none">
-                <!-- Marco de fondo decorativo -->
                 <div class="absolute inset-0 bg-art-accent rounded-3xl rotate-3 scale-102 opacity-10"></div>
-                <!-- Imagen principal -->
-                <img src="https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&q=80&w=800" alt="Artesana tejiendo con hilos naturales" class="rounded-3xl shadow-xl border-4 border-white object-cover w-full h-[350px] md:h-[450px] relative z-10" />
-                <!-- Detalle flotante artesanal -->
+                <img src="https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&q=80&w=800" alt="Artesana Gavy Montez tejiendo con amor" class="rounded-3xl shadow-xl border-4 border-white object-cover w-full h-[350px] md:h-[450px] relative z-10" />
                 <div class="absolute -bottom-6 -left-6 bg-white p-4 rounded-2xl shadow-lg border border-art-border max-w-[200px] z-20 hidden sm:block">
                   <div class="flex items-center gap-3">
-                    <span class="text-3xl text-art-accent"><i class="fa-solid fa-heart-pulse"></i></span>
+                    <span class="text-3xl text-art-accent"><i class="fa-solid fa-heart"></i></span>
                     <div>
-                      <p class="text-xs font-bold uppercase text-art-accent">100% Único</p>
-                      <p class="text-[10px] text-art-text/70">Sin moldes, hecho con el corazón.</p>
+                      <p class="text-xs font-bold uppercase text-art-accent">Esencia única</p>
+                      <p class="text-[10px] text-art-text/70">Hecho con amor en cada puntada.</p>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-
           </div>
         </div>
       </div>
 
-      <!-- SECCIÓN BIENVENIDA Y FILOSOFÍA -->
+      <!-- SECCIÓN FILOSOFÍA RENOVADA -->
       <section class="py-16 bg-white border-y border-art-border/30">
         <div class="max-w-5xl mx-auto px-4 text-center space-y-6">
-          <h2 class="text-3xl md:text-4xl font-serif font-bold text-art-text">El valor de lo hecho a mano</h2>
+          <h2 class="text-3xl md:text-4xl font-serif font-bold text-art-text">El valor de lo hecho a mano con amor</h2>
           <div class="w-24 h-1 bg-art-accent mx-auto rounded-full"></div>
           <p class="text-lg text-art-text/80 max-w-3xl mx-auto leading-relaxed">
-            Creemos que los objetos cotidianos deben tener alma. En nuestro pequeño taller, seleccionamos hilos de algodón, maderas rescatadas, arcilla y pigmentos naturales para crear piezas cargadas de buenas energías y tradición. No hay dos iguales.
+            En el taller de Gavy Montez, seleccionamos hilos de algodón, maderas nobles y pigmentos naturales. Cada creación es un reflejo de nuestra pasión por la artesanía cubana, con esmero y cariño. No hay dos iguales.
           </p>
           <div class="grid grid-cols-2 md:grid-cols-4 gap-6 pt-8">
-            <div class="p-4 rounded-2xl bg-art-bg border border-art-border/40">
-              <span class="block text-2xl text-art-accent mb-1"><i class="fa-solid fa-leaf"></i></span>
-              <h3 class="font-bold text-sm text-art-text">Materiales Eco</h3>
-            </div>
-            <div class="p-4 rounded-2xl bg-art-bg border border-art-border/40">
-              <span class="block text-2xl text-art-accent mb-1"><i class="fa-solid fa-truck-fast"></i></span>
-              <h3 class="font-bold text-sm text-art-text">Envíos Seguros</h3>
-            </div>
-            <div class="p-4 rounded-2xl bg-art-bg border border-art-border/40">
-              <span class="block text-2xl text-art-accent mb-1"><i class="fa-solid fa-wand-magic-sparkles"></i></span>
-              <h3 class="font-bold text-sm text-art-text">Diseños Únicos</h3>
-            </div>
-            <div class="p-4 rounded-2xl bg-art-bg border border-art-border/40">
-              <span class="block text-2xl text-art-accent mb-1"><i class="fa-brands fa-whatsapp"></i></span>
-              <h3 class="font-bold text-sm text-art-text">Trato Directo</h3>
-            </div>
+            <div class="p-4 rounded-2xl bg-art-bg border border-art-border/40"><span class="block text-2xl text-art-accent mb-1"><i class="fa-solid fa-leaf"></i></span><h3 class="font-bold text-sm text-art-text">Materiales Eco</h3></div>
+            <div class="p-4 rounded-2xl bg-art-bg border border-art-border/40"><span class="block text-2xl text-art-accent mb-1"><i class="fa-solid fa-truck-fast"></i></span><h3 class="font-bold text-sm text-art-text">Envíos Seguros</h3></div>
+            <div class="p-4 rounded-2xl bg-art-bg border border-art-border/40"><span class="block text-2xl text-art-accent mb-1"><i class="fa-solid fa-wand-magic-sparkles"></i></span><h3 class="font-bold text-sm text-art-text">Diseños Únicos</h3></div>
+            <div class="p-4 rounded-2xl bg-art-bg border border-art-border/40"><span class="block text-2xl text-art-accent mb-1"><i class="fa-brands fa-whatsapp"></i></span><h3 class="font-bold text-sm text-art-text">Trato Directo</h3></div>
           </div>
         </div>
       </section>
 
-      <!-- PRODUCTOS DESTACADOS (GRID DE 4-6 ITEMS) -->
+      <!-- PRODUCTOS DESTACADOS -->
       <section id="featured-products" class="py-16 md:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-4">
-          <div>
-            <span class="text-art-accent uppercase tracking-widest text-xs font-bold">Selección especial</span>
-            <h2 class="text-3xl md:text-4xl font-serif font-bold text-art-text mt-1">Creaciones destacadas</h2>
-          </div>
-          <button onclick="showPage('catalogo')" class="text-art-accent hover:text-art-hover font-semibold flex items-center gap-2 group transition-colors">
-            Ver todo el catálogo <i class="fa-solid fa-arrow-right transform group-hover:translate-x-1 transition-transform"></i>
-          </button>
+          <div><span class="text-art-accent uppercase tracking-widest text-xs font-bold">Favoritos del taller</span><h2 class="text-3xl md:text-4xl font-serif font-bold text-art-text mt-1">Creaciones destacadas</h2></div>
+          <button onclick="showPage('catalogo')" class="text-art-accent hover:text-art-hover font-semibold flex items-center gap-2 group">Ver todo el catálogo <i class="fa-solid fa-arrow-right transform group-hover:translate-x-1 transition-transform"></i></button>
         </div>
-
-        <!-- GRID DE PRODUCTOS DESTACADOS -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8" id="featured-grid">
-          <!-- Generado dinámicamente con JS para consistencia de datos -->
-        </div>
-
-        <div class="mt-16 text-center">
-          <button onclick="showPage('catalogo')" class="inline-block bg-art-accent hover:bg-art-hover text-white text-base font-semibold px-8 py-4 rounded-full transition-all shadow-md">
-            Ver todo el catálogo (12 productos)
-          </button>
-        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8" id="featured-grid"></div>
+        <div class="mt-16 text-center"><button onclick="showPage('catalogo')" class="inline-block bg-art-accent hover:bg-art-hover text-white text-base font-semibold px-8 py-4 rounded-full transition-all shadow-md">Ver catálogo completo (12 productos)</button></div>
       </section>
-
     </section>
 
-
-    <!-- ==================== PÁGINA 2: CATÁLOGO COMPLETO ==================== -->
+    <!-- ==================== PÁGINA CATÁLOGO ==================== -->
     <section id="page-catalogo" class="page-view hidden py-12">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        <!-- Cabecera Catálogo -->
         <div class="text-center max-w-2xl mx-auto mb-12">
-          <span class="text-art-accent uppercase tracking-widest text-xs font-bold">Nuestra Colección</span>
-          <h1 class="text-4xl font-serif font-bold text-art-text mt-1">Catálogo de Piezas Únicas</h1>
-          <p class="text-art-text/70 mt-3">Filtra por categoría para encontrar lo que buscas. Haz clic en cualquier artículo para ver sus detalles, medidas e iniciar la consulta de compra directa.</p>
+          <span class="text-art-accent uppercase tracking-widest text-xs font-bold">Colección Gavy Montez</span>
+          <h1 class="text-4xl font-serif font-bold text-art-text mt-1">Piezas únicas, hechas con amor</h1>
+          <p class="text-art-text/70 mt-3">Filtra por categoría y haz clic en cualquier artículo para ver sus detalles, medidas e iniciar consulta directa por WhatsApp.</p>
         </div>
 
-        <!-- FILTROS DE CATEGORÍA (JS interactivos sin recargar) -->
         <div class="flex flex-wrap justify-center gap-3 mb-10" id="category-filters">
-          <button onclick="filterCategory('todos')" data-cat="todos" class="category-btn active px-5 py-2.5 rounded-full font-medium text-sm transition-all border border-art-accent bg-art-accent text-white">
-            ⭐ Todos los productos
-          </button>
-          <button onclick="filterCategory('pulseras')" data-cat="pulseras" class="category-btn px-5 py-2.5 rounded-full font-medium text-sm transition-all border border-art-border bg-white text-art-text hover:border-art-accent hover:text-art-accent">
-            📿 Pulseras
-          </button>
-          <button onclick="filterCategory('atrapasuenos')" data-cat="atrapasuenos" class="category-btn px-5 py-2.5 rounded-full font-medium text-sm transition-all border border-art-border bg-white text-art-text hover:border-art-accent hover:text-art-accent">
-            🕸️ Atrapasueños
-          </button>
-          <button onclick="filterCategory('esculturas')" data-cat="esculturas" class="category-btn px-5 py-2.5 rounded-full font-medium text-sm transition-all border border-art-border bg-white text-art-text hover:border-art-accent hover:text-art-accent">
-            🏺 Esculturas pintadas
-          </button>
-          <button onclick="filterCategory('sombreros')" data-cat="sombreros" class="category-btn px-5 py-2.5 rounded-full font-medium text-sm transition-all border border-art-border bg-white text-art-text hover:border-art-accent hover:text-art-accent">
-            🎓 Sombreros Universitarios
-          </button>
+          <button onclick="filterCategory('todos')" data-cat="todos" class="category-btn active px-5 py-2.5 rounded-full font-medium text-sm transition-all border border-art-accent bg-art-accent text-white">⭐ Todos los productos</button>
+          <button onclick="filterCategory('pulseras')" data-cat="pulseras" class="category-btn px-5 py-2.5 rounded-full font-medium text-sm transition-all border border-art-border bg-white text-art-text hover:border-art-accent">📿 Pulseras</button>
+          <button onclick="filterCategory('atrapasuenos')" data-cat="atrapasuenos" class="category-btn px-5 py-2.5 rounded-full font-medium text-sm transition-all border border-art-border bg-white text-art-text hover:border-art-accent">🕸️ Atrapasueños</button>
+          <button onclick="filterCategory('esculturas')" data-cat="esculturas" class="category-btn px-5 py-2.5 rounded-full font-medium text-sm transition-all border border-art-border bg-white text-art-text hover:border-art-accent">🏺 Esculturas</button>
+          <button onclick="filterCategory('sombreros')" data-cat="sombreros" class="category-btn px-5 py-2.5 rounded-full font-medium text-sm transition-all border border-art-border bg-white text-art-text hover:border-art-accent">🎓 Sombreros</button>
         </div>
 
-        <!-- GRID DE PRODUCTOS (Responde a 1 col móvil, 2 cols tablet, 3-4 cols escritorio) -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8" id="catalogo-grid">
-          <!-- Generado dinámicamente con JS -->
-        </div>
-
-        <!-- Estado vacío si no hay filtros -->
-        <div id="empty-catalog-state" class="hidden text-center py-16">
-          <p class="text-lg text-art-text/70 font-medium">No se encontraron productos en esta categoría por el momento.</p>
-          <button onclick="filterCategory('todos')" class="mt-4 bg-art-accent text-white px-6 py-2 rounded-full">Mostrar todos</button>
-        </div>
-
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8" id="catalogo-grid"></div>
+        <div id="empty-catalog-state" class="hidden text-center py-16"><p class="text-lg text-art-text/70 font-medium">No se encontraron productos en esta categoría.</p><button onclick="filterCategory('todos')" class="mt-4 bg-art-accent text-white px-6 py-2 rounded-full">Mostrar todos</button></div>
       </div>
     </section>
 
-
-    <!-- ==================== PÁGINA 3: DETALLE DEL PRODUCTO ==================== -->
+    <!-- ==================== PÁGINA DETALLE ==================== -->
     <section id="page-detalle" class="page-view hidden py-12">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        <!-- Botón para regresar al catálogo -->
-        <button onclick="showPage('catalogo')" class="inline-flex items-center gap-2 text-art-text hover:text-art-accent font-medium mb-8 transition-colors group">
-          <i class="fa-solid fa-arrow-left transition-transform group-hover:-translate-x-1"></i> Volver al catálogo completo
-        </button>
-
-        <!-- CONTENEDOR DEL DETALLE -->
+        <button onclick="showPage('catalogo')" class="inline-flex items-center gap-2 text-art-text hover:text-art-accent font-medium mb-8 transition-colors group"><i class="fa-solid fa-arrow-left transition-transform group-hover:-translate-x-1"></i> Volver al catálogo</button>
         <div class="bg-white rounded-3xl p-6 md:p-12 border border-art-border shadow-md">
           <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
-            
-            <!-- PANEL IZQUIERDO: GALERÍA DE IMÁGENES -->
             <div class="lg:col-span-7 flex flex-col-reverse md:flex-row gap-4">
-              <!-- Miniaturas verticales/horizontales -->
-              <div class="flex md:flex-col gap-3 justify-start md:justify-start w-full md:w-20 overflow-x-auto md:overflow-x-visible" id="detail-thumbnails">
-                <!-- Se inyectan dinámicamente -->
-              </div>
-              <!-- Imagen Principal Grande -->
+              <div class="flex md:flex-col gap-3 justify-start md:justify-start w-full md:w-20 overflow-x-auto md:overflow-x-visible" id="detail-thumbnails"></div>
               <div class="flex-grow bg-art-bg rounded-2xl overflow-hidden border border-art-border relative h-[300px] sm:h-[450px] md:h-[500px]">
-                <img id="detail-main-img" src="" alt="" class="w-full h-full object-cover transition-all duration-300">
+                <img id="detail-main-img" src="" alt="" class="w-full h-full object-cover">
                 <span id="detail-category-badge" class="absolute top-4 left-4 bg-art-secondary text-white text-xs font-bold uppercase px-3 py-1 rounded-full"></span>
               </div>
             </div>
-
-            <!-- PANEL DERECHO: DETALLES, PRECIO Y BOTÓN WHATSAPP -->
             <div class="lg:col-span-5 flex flex-col justify-between space-y-6">
-              
               <div class="space-y-4">
                 <h1 id="detail-title" class="text-3xl md:text-4xl font-serif font-bold text-art-text"></h1>
-                
-                <div class="flex items-baseline gap-3">
-                  <span id="detail-price" class="text-3xl font-bold text-art-accent"></span>
-                  <span class="text-xs text-art-secondary bg-art-secondary/10 px-2.5 py-1 rounded-md font-semibold">Pieza única hecha a mano</span>
-                </div>
-
-                <div class="border-t border-b border-art-border/60 py-4 my-2">
-                  <p class="text-sm font-bold text-art-text/60 uppercase tracking-wider mb-2">Descripción del artista</p>
-                  <p id="detail-desc" class="text-art-text/80 leading-relaxed text-sm md:text-base"></p>
-                </div>
-
-                <!-- Detalles técnicos (Materiales y Tamaño) -->
+                <div class="flex items-baseline gap-3"><span id="detail-price" class="text-3xl font-bold text-art-accent"></span><span class="text-xs text-art-secondary bg-art-secondary/10 px-2.5 py-1 rounded-md font-semibold">Pieza única · Hecha a mano con amor</span></div>
+                <div class="border-t border-b border-art-border/60 py-4"><p class="text-sm font-bold text-art-text/60 uppercase tracking-wider mb-2">Descripción de la artesana</p><p id="detail-desc" class="text-art-text/80 leading-relaxed text-sm md:text-base"></p></div>
                 <div class="grid grid-cols-2 gap-4">
-                  <div class="bg-art-bg p-3.5 rounded-xl border border-art-border/40">
-                    <span class="block text-xs font-bold text-art-text/50 uppercase">Materiales</span>
-                    <span id="detail-materials" class="text-sm font-semibold text-art-text"></span>
-                  </div>
-                  <div class="bg-art-bg p-3.5 rounded-xl border border-art-border/40">
-                    <span class="block text-xs font-bold text-art-text/50 uppercase">Tamaño / Medidas</span>
-                    <span id="detail-size" class="text-sm font-semibold text-art-text"></span>
-                  </div>
+                  <div class="bg-art-bg p-3.5 rounded-xl border border-art-border/40"><span class="block text-xs font-bold text-art-text/50 uppercase">Materiales</span><span id="detail-materials" class="text-sm font-semibold text-art-text"></span></div>
+                  <div class="bg-art-bg p-3.5 rounded-xl border border-art-border/40"><span class="block text-xs font-bold text-art-text/50 uppercase">Tamaño / Medidas</span><span id="detail-size" class="text-sm font-semibold text-art-text"></span></div>
                 </div>
-
-                <!-- Info adicional de envíos y empaquetado -->
-                <div class="space-y-2 pt-2">
-                  <div class="flex items-center gap-2 text-xs text-art-text/70">
-                    <i class="fa-solid fa-gift text-art-accent"></i>
-                    <span><strong>Empaque de regalo eco-amigable:</strong> Bolsa de lona de algodón y etiqueta manuscrita.</span>
-                  </div>
-                  <div class="flex items-center gap-2 text-xs text-art-text/70">
-                    <i class="fa-solid fa-truck text-art-accent"></i>
-                    <span><strong>Envíos:</strong> A todo el país desde nuestro taller. Tiempos de entrega: 2 a 5 días hábiles.</span>
-                  </div>
-                </div>
+                <div class="space-y-2 pt-2"><div class="flex items-center gap-2 text-xs text-art-text/70"><i class="fa-solid fa-gift text-art-accent"></i><span><strong>Empaque de regalo eco-amigable:</strong> Bolsa de lona y etiqueta manuscrita.</span></div><div class="flex items-center gap-2 text-xs text-art-text/70"><i class="fa-solid fa-truck text-art-accent"></i><span><strong>Envíos:</strong> Envíos desde La Habana a toda Cuba. Tiempos de entrega coordinados.</span></div></div>
               </div>
-
-              <!-- BOTÓN DE CONTACTO WHATSAPP DIRECTO -->
               <div class="pt-6 space-y-3">
-                <a id="detail-whatsapp-link" href="#" target="_blank" class="w-full bg-[#25D366] hover:bg-[#20ba5a] text-white py-4 px-6 rounded-2xl font-bold text-center block transition-all hover:shadow-lg shadow-[#25D366]/20 flex items-center justify-center gap-3 transform hover:-translate-y-0.5 active:translate-y-0 text-base md:text-lg">
-                  <i class="fa-brands fa-whatsapp text-2xl"></i> Consultar disponibilidad por WhatsApp
-                </a>
-                
-                <!-- SIMULADOR INTERACTIVO DEL MENSAJE (Explicación para el prototipo) -->
-                <div class="bg-blue-50 border border-blue-200 p-3 rounded-xl text-xs text-blue-800 space-y-1">
-                  <span class="font-bold"><i class="fa-solid fa-circle-info"></i> Nota del Prototipo:</span>
-                  <p>Al hacer clic, el botón abrirá un chat predefinido de WhatsApp que dirá:</p>
-                  <p class="italic bg-white p-2 rounded border border-blue-100 font-mono text-[11px]" id="detail-whatsapp-preview"></p>
-                </div>
+                <a id="detail-whatsapp-link" href="#" target="_blank" class="w-full bg-[#25D366] hover:bg-[#20ba5a] text-white py-4 px-6 rounded-2xl font-bold text-center block transition-all flex items-center justify-center gap-3"><i class="fa-brands fa-whatsapp text-2xl"></i> Consultar disponibilidad por WhatsApp</a>
+                <div class="bg-blue-50 border border-blue-200 p-3 rounded-xl text-xs text-blue-800"><span class="font-bold"><i class="fa-solid fa-circle-info"></i> Nota:</span> Al hacer clic se abre chat con mensaje predefinido.</div>
               </div>
-
             </div>
           </div>
         </div>
-
-        <!-- SECCIÓN: PRODUCTOS SIMILARES (Carrusel horizontal interactivo) -->
-        <div class="mt-16">
-          <h2 class="text-2xl md:text-3xl font-serif font-bold text-art-text mb-6">También te puede gustar</h2>
-          <div class="relative">
-            <!-- Contenedor del Carrusel con scroll táctil (swipe) -->
-            <div id="similar-products-carousel" class="flex gap-6 overflow-x-auto pb-4 custom-scrollbar snap-x snap-mandatory">
-              <!-- Se inyecta dinámicamente según la categoría actual -->
-            </div>
-          </div>
-        </div>
-
+        <div class="mt-16"><h2 class="text-2xl md:text-3xl font-serif font-bold text-art-text mb-6">También te puede gustar</h2><div id="similar-products-carousel" class="flex gap-6 overflow-x-auto pb-4 custom-scrollbar snap-x snap-mandatory"></div></div>
       </div>
     </section>
 
-
-    <!-- ==================== PÁGINA 4: CONTACTO ==================== -->
+    <!-- ==================== PÁGINA CONTACTO (DATOS ACTUALIZADOS) ==================== -->
     <section id="page-contacto" class="page-view hidden py-16">
       <div class="max-w-4xl mx-auto px-4 sm:px-6">
-        
         <div class="text-center max-w-2xl mx-auto mb-12">
           <span class="text-art-accent uppercase tracking-widest text-xs font-bold">Ubicación y Canales</span>
-          <h1 class="text-4xl font-serif font-bold text-art-text mt-1">Conecta con el Taller</h1>
-          <p class="text-art-text/70 mt-3">No requerimos registro. Atendemos de manera cercana y personalizada. Respondemos a la brevedad por redes o mensajería.</p>
+          <h1 class="text-4xl font-serif font-bold text-art-text mt-1">Conecta con Gavy Montez</h1>
+          <p class="text-art-text/70 mt-3">Atención personalizada, sin registro. Respondemos con el mismo amor con que creamos cada pieza.</p>
         </div>
-
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
-          
-          <!-- Canales de comunicación principales -->
           <div class="bg-white rounded-3xl p-8 border border-art-border shadow-md flex flex-col justify-between space-y-8">
             <h2 class="text-2xl font-serif font-bold text-art-text">Vías directas de contacto</h2>
-            
             <div class="space-y-6">
-              
-              <!-- WhatsApp -->
-              <a href="https://wa.me/5491112345678" target="_blank" class="flex items-center gap-4 p-4 rounded-2xl bg-[#25D366]/5 border border-[#25D366]/20 hover:bg-[#25D366]/10 transition-colors group">
-                <span class="w-12 h-12 rounded-xl bg-[#25D366] text-white flex items-center justify-center text-2xl shadow-sm">
-                  <i class="fa-brands fa-whatsapp"></i>
-                </span>
-                <div>
-                  <h3 class="font-bold text-art-text group-hover:text-art-accent transition-colors">WhatsApp Directo</h3>
-                  <p class="text-xs text-art-text/70">Atención instantánea: Lunes a Sábado, 9:00 a 19:00 hs.</p>
-                  <p class="text-sm font-semibold text-[#25D366] mt-0.5">+54 9 11 1234-5678</p>
-                </div>
+              <!-- WhatsApp +53 58481876 -->
+              <a href="https://wa.me/5358481876" target="_blank" class="flex items-center gap-4 p-4 rounded-2xl bg-[#25D366]/5 border border-[#25D366]/20 hover:bg-[#25D366]/10 transition-colors group">
+                <span class="w-12 h-12 rounded-xl bg-[#25D366] text-white flex items-center justify-center text-2xl"><i class="fa-brands fa-whatsapp"></i></span>
+                <div><h3 class="font-bold text-art-text group-hover:text-art-accent">WhatsApp Directo</h3><p class="text-xs text-art-text/70">Atención rápida, horario flexible. Escríbenos.</p><p class="text-sm font-semibold text-[#25D366] mt-0.5">+53 58481876</p></div>
               </a>
-
-              <!-- Instagram -->
-              <a href="https://instagram.com/artemanos" target="_blank" class="flex items-center gap-4 p-4 rounded-2xl bg-gradient-to-tr from-yellow-500/5 via-red-500/5 to-purple-500/5 border border-purple-500/10 hover:bg-gradient-to-tr hover:from-yellow-500/10 hover:via-red-500/10 hover:to-purple-500/10 transition-colors group">
-                <span class="w-12 h-12 rounded-xl bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] text-white flex items-center justify-center text-2xl shadow-sm">
-                  <i class="fa-brands fa-instagram"></i>
-                </span>
-                <div>
-                  <h3 class="font-bold text-art-text group-hover:text-art-accent transition-colors">Instagram</h3>
-                  <p class="text-xs text-art-text/70">Síguenos para ver nuestro proceso creativo y nuevos lanzamientos.</p>
-                  <p class="text-sm font-semibold text-purple-600 mt-0.5">@artemanos</p>
-                </div>
+              <!-- Instagram @gavymontez_creaciones -->
+              <a href="https://instagram.com/gavymontez_creaciones" target="_blank" class="flex items-center gap-4 p-4 rounded-2xl bg-gradient-to-tr from-yellow-500/5 via-red-500/5 to-purple-500/5 border border-purple-500/10 hover:bg-gradient-to-tr hover:from-yellow-500/10 transition-colors group">
+                <span class="w-12 h-12 rounded-xl bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] text-white flex items-center justify-center text-2xl"><i class="fa-brands fa-instagram"></i></span>
+                <div><h3 class="font-bold text-art-text group-hover:text-art-accent">Instagram</h3><p class="text-xs text-art-text/70">Sigue el proceso creativo y nuevas colecciones.</p><p class="text-sm font-semibold text-purple-600 mt-0.5">@gavymontez_creaciones</p></div>
               </a>
-
-              <!-- Correo electrónico -->
-              <a href="mailto:hola@artemanos.com" class="flex items-center gap-4 p-4 rounded-2xl bg-art-secondary/5 border border-art-secondary/20 hover:bg-art-secondary/10 transition-colors group">
-                <span class="w-12 h-12 rounded-xl bg-art-secondary text-white flex items-center justify-center text-xl shadow-sm">
-                  <i class="fa-solid fa-envelope"></i>
-                </span>
-                <div>
-                  <h3 class="font-bold text-art-text group-hover:text-art-accent transition-colors">Correo Electrónico</h3>
-                  <p class="text-xs text-art-text/70">Para consultas corporativas o pedidos personalizados especiales.</p>
-                  <p class="text-sm font-semibold text-art-secondary mt-0.5">hola@artemanos.com</p>
-                </div>
+              <!-- Email -->
+              <a href="mailto:gavymontez@artemanos.com" class="flex items-center gap-4 p-4 rounded-2xl bg-art-secondary/5 border border-art-secondary/20 hover:bg-art-secondary/10 transition-colors group">
+                <span class="w-12 h-12 rounded-xl bg-art-secondary text-white flex items-center justify-center text-xl"><i class="fa-solid fa-envelope"></i></span>
+                <div><h3 class="font-bold text-art-text group-hover:text-art-accent">Correo Electrónico</h3><p class="text-xs text-art-text/70">Pedidos personalizados o consultas.</p><p class="text-sm font-semibold text-art-secondary mt-0.5">gavymontez@creaciones.com</p></div>
               </a>
-
             </div>
-
-            <!-- Información sobre envíos y plazos de respuesta -->
-            <div class="bg-art-bg p-4 rounded-2xl border border-art-border text-xs space-y-2">
-              <p class="font-bold text-art-accent"><i class="fa-solid fa-paper-plane"></i> Información Importante:</p>
-              <ul class="list-disc pl-4 space-y-1 text-art-text/80">
-                <li>Respondemos todas las consultas por WhatsApp en un promedio de 30 minutos dentro de nuestro horario laboral.</li>
-                <li>Los pedidos artesanales personalizados se agendan con un 50% de anticipación.</li>
-                <li>Hacemos despachos de productos en stock todos los días Martes y Viernes.</li>
-              </ul>
-            </div>
+            <div class="bg-art-bg p-4 rounded-2xl border border-art-border text-xs space-y-2"><p class="font-bold text-art-accent"><i class="fa-solid fa-paper-plane"></i> Información importante:</p><ul class="list-disc pl-4 space-y-1 text-art-text/80"><li>Respondemos consultas por WhatsApp en menos de 1 hora (horario laboral).</li><li>Los pedidos personalizados requieren coordinación previa.</li><li>Despachos desde La Lisa, La Habana.</li></ul></div>
           </div>
-
-          <!-- Mapa interactivo simulado y taller -->
           <div class="bg-white rounded-3xl p-8 border border-art-border shadow-md flex flex-col justify-between space-y-6">
-            <div class="space-y-2">
-              <h2 class="text-2xl font-serif font-bold text-art-text">Nuestro Taller Creativo</h2>
-              <p class="text-sm text-art-text/70">San Telmo, Buenos Aires, Argentina (Retiro de compras únicamente bajo cita previa).</p>
-            </div>
-
-            <!-- Mapa simulado realista -->
+            <div><h2 class="text-2xl font-serif font-bold text-art-text">Nuestro Taller Creativo</h2><p class="text-sm text-art-text/70">La Lisa, La Habana, Cuba (retiro con cita previa).</p></div>
             <div class="flex-grow min-h-[250px] bg-[#EAE0D1] rounded-2xl relative overflow-hidden border border-art-border flex items-center justify-center">
-              <!-- Reemplazo seguro de mapa con ilustración estilizada interactiva -->
               <div class="absolute inset-0 opacity-15 bg-[radial-gradient(#C17A4D_1.5px,transparent_1.5px)] [background-size:16px_16px]"></div>
-              
               <div class="relative z-10 text-center p-6 space-y-3">
-                <div class="w-14 h-14 bg-art-accent text-white rounded-full flex items-center justify-center text-2xl mx-auto shadow-md animate-bounce">
-                  <i class="fa-solid fa-location-dot"></i>
-                </div>
-                <div>
-                  <p class="font-serif font-bold text-art-text text-lg">San Telmo, CABA</p>
-                  <p class="text-xs text-art-text/60 mt-0.5">Calle Defensa al 800 - El corazón del arte local</p>
-                </div>
-                <span class="inline-block bg-white text-art-accent border border-art-border px-3 py-1.5 rounded-full text-xs font-semibold shadow-sm">
-                  <i class="fa-regular fa-map"></i> Mapa referencial para entregas
-                </span>
+                <div class="w-14 h-14 bg-art-accent text-white rounded-full flex items-center justify-center text-2xl mx-auto shadow-md animate-bounce"><i class="fa-solid fa-location-dot"></i></div>
+                <div><p class="font-serif font-bold text-art-text text-lg">La Lisa, La Habana</p><p class="text-xs text-art-text/60 mt-0.5">Cerca del Boulevard, corazón artesanal</p></div>
+                <span class="inline-block bg-white text-art-accent border border-art-border px-3 py-1.5 rounded-full text-xs font-semibold"><i class="fa-regular fa-map"></i> Mapa referencial para entregas</span>
               </div>
             </div>
-
-            <!-- Nota de la simulación -->
-            <p class="text-[11px] text-art-text/50 text-center italic">
-              * Nota: Al no requerir local a la calle, facilitamos el retiro previa coordinación del pedido validado por WhatsApp.
-            </p>
+            <p class="text-[11px] text-art-text/50 text-center italic">* Prototipo: entregas presenciales coordinadas vía WhatsApp.</p>
           </div>
-
         </div>
-
       </div>
     </section>
-
   </main>
 
-  <!-- PIE DE PÁGINA SIMPLE (FOOTER) -->
+  <!-- FOOTER RENOVADO -->
   <footer class="bg-art-text text-white py-12 border-t border-art-border/20">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8 pb-8 border-b border-white/10">
-        
-        <!-- Info del emprendimiento -->
-        <div class="space-y-4">
-          <div class="flex items-center gap-2">
-            <div class="w-8 h-8 rounded-full bg-art-accent flex items-center justify-center text-white text-base font-serif">A</div>
-            <span class="text-lg font-serif font-bold tracking-wide">ArteManos</span>
-          </div>
-          <p class="text-sm text-white/70 max-w-sm leading-relaxed">
-            Tejiendo memorias, moldeando sueños. Todas nuestras artesanías se elaboran con materiales de primera calidad en nuestro taller.
-          </p>
-        </div>
-
-        <!-- Enlaces rápidos -->
-        <div class="space-y-4">
-          <h4 class="text-sm font-semibold uppercase tracking-wider text-art-accent">Navegación</h4>
-          <ul class="space-y-2 text-sm text-white/70">
-            <li><button onclick="showPage('home')" class="hover:text-white transition-colors">Inicio</button></li>
-            <li><button onclick="showPage('catalogo')" class="hover:text-white transition-colors">Catálogo Completo</button></li>
-            <li><button onclick="showPage('contacto')" class="hover:text-white transition-colors">Ubicación y Contacto</button></li>
-          </ul>
-        </div>
-
-        <!-- Contacto rápido -->
-        <div class="space-y-4">
-          <h4 class="text-sm font-semibold uppercase tracking-wider text-art-accent">Canales de Atención</h4>
-          <ul class="space-y-2 text-sm text-white/70">
-            <li><i class="fa-brands fa-whatsapp text-art-accent mr-1.5"></i> +54 9 11 1234-5678</li>
-            <li><i class="fa-brands fa-instagram text-art-accent mr-1.5"></i> @artemanos</li>
-            <li><i class="fa-solid fa-location-dot text-art-accent mr-1.5"></i> San Telmo, Buenos Aires</li>
-          </ul>
-        </div>
-
+        <div class="space-y-4"><div class="flex items-center gap-2"><div class="w-8 h-8 rounded-full bg-art-accent flex items-center justify-center text-white text-base font-serif">GM</div><span class="text-lg font-serif font-bold tracking-wide">Gavy Montez</span></div><p class="text-sm text-white/70 max-w-sm">Creaciones hechas a mano con Amor. Cada puntada, cada pincelada, lleva esencia cubana.</p></div>
+        <div class="space-y-4"><h4 class="text-sm font-semibold uppercase tracking-wider text-art-accent">Navegación</h4><ul class="space-y-2 text-sm text-white/70"><li><button onclick="showPage('home')" class="hover:text-white">Inicio</button></li><li><button onclick="showPage('catalogo')" class="hover:text-white">Catálogo Completo</button></li><li><button onclick="showPage('contacto')" class="hover:text-white">Ubicación y Contacto</button></li></ul></div>
+        <div class="space-y-4"><h4 class="text-sm font-semibold uppercase tracking-wider text-art-accent">Canales</h4><ul class="space-y-2 text-sm text-white/70"><li><i class="fa-brands fa-whatsapp text-art-accent mr-1.5"></i> +53 58481876</li><li><i class="fa-brands fa-instagram text-art-accent mr-1.5"></i> @gavymontez_creaciones</li><li><i class="fa-solid fa-location-dot text-art-accent mr-1.5"></i> La Lisa, La Habana, Cuba</li></ul></div>
       </div>
-
-      <div class="pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-white/50 gap-4">
-        <p>© 2025 ArteManos. Todos los derechos reservados. Hecho a mano, desde el corazón.</p>
-        <p class="flex items-center gap-4">
-          <span>Prototipo en Línea</span>
-          <span class="w-1.5 h-1.5 rounded-full bg-green-400"></span>
-          <span>WhatsApp Activo</span>
-        </p>
-      </div>
+      <div class="pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-white/50 gap-4"><p>© 2025 Gavy Montez · Creaciones hechas a mano con Amor. Todos los derechos reservados.</p><p class="flex items-center gap-4"><span>Prototipo interactivo</span><span class="w-1.5 h-1.5 rounded-full bg-green-400"></span><span>WhatsApp Activo</span></p></div>
     </div>
   </footer>
 
-  <!-- BOTÓN FLOTANTE WHATSAPP (Todas las páginas) -->
-  <a href="https://wa.me/5491112345678?text=Hola%20ArteManos!%20Vengo%20desde%20su%20web%20cat%C3%A1logo%20y%20me%20gustar%C3%ADa%20hacer%20una%20consulta." target="_blank" class="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white w-14 h-14 rounded-full flex items-center justify-center text-3xl shadow-xl hover:bg-[#20ba5a] hover:scale-110 active:scale-95 transition-all group" aria-label="Contacto directo por WhatsApp">
-    <i class="fa-brands fa-whatsapp"></i>
-    <!-- Tooltip explicativo flotante que aparece al hacer hover -->
-    <span class="absolute right-16 bg-art-text text-white text-xs px-3 py-1.5 rounded-lg shadow-md whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none border border-art-border/20">
-      ¿Tienes dudas? Chatea con la artesana
-    </span>
-  </a>
+  <!-- Botón flotante WhatsApp (teléfono actualizado) -->
+  <a href="https://wa.me/5358481876?text=Hola%20Gavy%20Montez!%20Vengo%20desde%20su%20web%20cat%C3%A1logo%20y%20me%20encant%C3%B3%20una%20de%20sus%20creaciones%20%C2%BFpodr%C3%ADa%20consultar%20disponibilidad%3F" target="_blank" class="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white w-14 h-14 rounded-full flex items-center justify-center text-3xl shadow-xl hover:bg-[#20ba5a] hover:scale-110 transition-all group"><i class="fa-brands fa-whatsapp"></i><span class="absolute right-16 bg-art-text text-white text-xs px-3 py-1.5 rounded-lg shadow-md whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">¿Dudas? Chatea con Gavy</span></a>
 
-  <!-- MODAL DE INFORMACIÓN DEL PROTOTIPO -->
+  <!-- MODAL GUÍA -->
   <div id="prototipo-info-modal" class="hidden fixed inset-0 z-50 overflow-y-auto bg-black/60 flex items-center justify-center p-4">
-    <div class="bg-white rounded-3xl p-6 md:p-8 max-w-2xl w-full border border-art-border shadow-2xl relative">
-      <button onclick="document.getElementById('prototipo-info-modal').classList.add('hidden')" class="absolute top-4 right-4 text-art-text/60 hover:text-art-accent text-xl">
-        <i class="fa-solid fa-xmark"></i>
-      </button>
-      
-      <div class="space-y-6">
-        <div class="flex items-center gap-3">
-          <span class="text-3xl text-art-accent"><i class="fa-solid fa-circle-question"></i></span>
-          <h2 class="text-2xl font-serif font-bold text-art-text">Guía de Navegación del Prototipo</h2>
-        </div>
-
-        <div class="space-y-4 text-sm text-art-text/80">
-          <p>Este catálogo artesanal digital se diseñó para cumplir con todos los requerimientos especificados. Funciona en un solo documento para proveer una simulación fluida (sin tiempos de carga por servidores):</p>
-          
-          <div class="border-l-4 border-art-accent pl-4 space-y-2">
-            <p>📌 <strong>Simulación Responsiva:</strong> Puedes cambiar el ancho de tu navegador para emular cómo se distribuyen las tarjetas de productos en móviles (375px) con grillas de 1 o 2 columnas, o en resoluciones anchas de escritorio (1440px) en grillas de 3 y 4 columnas.</p>
-            <p>📌 <strong>Filtros por Categoría:</strong> En el menú Catálogo, puedes hacer clic sobre "Pulseras", "Atrapasueños", "Esculturas" o "Sombreros" para filtrar instantáneamente el contenido.</p>
-            <p>📌 <strong>Vínculo Real de WhatsApp:</strong> Al pulsar en "Consultar disponibilidad", el sistema lee el nombre del producto actual y su precio para generar el link con un mensaje automático respetando el formato preestablecido.</p>
-          </div>
-        </div>
-
-        <button onclick="document.getElementById('prototipo-info-modal').classList.add('hidden')" class="w-full bg-art-accent text-white py-3 rounded-xl font-bold transition-all hover:bg-art-hover">
-          Entendido, ¡quiero probarlo!
-        </button>
-      </div>
-    </div>
+    <div class="bg-white rounded-3xl p-6 md:p-8 max-w-2xl w-full border border-art-border shadow-2xl relative"><button onclick="document.getElementById('prototipo-info-modal').classList.add('hidden')" class="absolute top-4 right-4 text-art-text/60 hover:text-art-accent text-xl"><i class="fa-solid fa-xmark"></i></button><div class="space-y-6"><div class="flex items-center gap-3"><span class="text-3xl text-art-accent"><i class="fa-solid fa-circle-question"></i></span><h2 class="text-2xl font-serif font-bold text-art-text">Guía Gavy Montez</h2></div><div class="space-y-4 text-sm text-art-text/80"><p>Catálogo artesanal interactivo con identidad Gavy Montez. Filtros funcionales, WhatsApp real (+53 58481876), Instagram @gavymontez_creaciones y ubicación La Lisa, La Habana.</p><div class="border-l-4 border-art-accent pl-4 space-y-2"><p>📌 <strong>Responsive:</strong> Prueba en móvil o escritorio.</p><p>📌 <strong>Filtros por categorías</strong> en Catálogo.</p><p>📌 <strong>WhatsApp integrado:</strong> mensaje automático con producto seleccionado.</p></div></div><button onclick="document.getElementById('prototipo-info-modal').classList.add('hidden')" class="w-full bg-art-accent text-white py-3 rounded-xl font-bold">Entendido, explorar tienda</button></div></div>
   </div>
 
-
-  <!-- ==================== LOGICA JAVASCRIPT (DATOS Y NAVEGACIÓN) ==================== -->
   <script>
-    // DATOS DE LOS PRODUCTOS DEL CATÁLOGO ARTESANAL (12 Productos con imágenes de calidad y detalles realistas)
-    const productos = [
-      {
-        id: 1,
-        nombre: "Pulsera Maya",
-        precio: "$15.000",
-        categoria: "pulseras",
-        destacado: true,
-        img: "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&q=80&w=600",
-        miniaturas: [
-          "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&q=80&w=600",
-          "https://images.unsplash.com/photo-1573408301185-9146fe634ad0?auto=format&fit=crop&q=80&w=600",
-          "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&q=80&w=600"
-        ],
-        materiales: "Hilo de algodón natural, mostacillas artesanales importadas",
-        tamano: "18 cm (ajustable con nudo corredizo)",
-        descripcion: "Inspirada en los colores vivos de las textilerías tradicionales de Mesoamérica. Cada pulsera es tejida minuciosamente con la técnica de macramé, asegurando una durabilidad asombrosa e hilos hipoalergénicos agradables al tacto."
-      },
-      {
-        id: 2,
-        nombre: "Atrapasueños Bosque Sagrado",
-        precio: "$28.500",
-        categoria: "atrapasuenos",
-        destacado: true,
-        img: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&q=80&w=600",
-        miniaturas: [
-          "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&q=80&w=600",
-          "https://images.unsplash.com/photo-1502224562085-639556652f33?auto=format&fit=crop&q=80&w=600"
-        ],
-        materiales: "Aro de sauce artesanal, hilos de cáñamo, plumas de recolección ética",
-        tamano: "Diámetro 25 cm, Largo total 65 cm",
-        descripcion: "Creado para armonizar ambientes. El aro central está tejido con la técnica tradicional Ojibwa y decorado con cuentas de madera curadas. Aporta calma visual gracias a su paleta inspirada en los bosques otoñales."
-      },
-      {
-        id: 3,
-        nombre: "Atrapasueños Brisa de Verano",
-        precio: "$24.000",
-        categoria: "atrapasuenos",
-        destacado: false,
-        img: "https://images.unsplash.com/photo-1594498653385-d527259017ef?auto=format&fit=crop&q=80&w=600",
-        miniaturas: [
-          "https://images.unsplash.com/photo-1594498653385-d527259017ef?auto=format&fit=crop&q=80&w=600"
-        ],
-        materiales: "Madera de bambú, encajes de algodón reciclado, amatista central",
-        tamano: "Diámetro 20 cm, Largo total 55 cm",
-        descripcion: "Un atrapasueños liviano con caídas de encaje y cintas de algodón que bailan con el viento. Ideal para cabeceras de camas infantiles o dormitorios con entrada de luz natural."
-      },
-      {
-        id: 4,
-        nombre: "Escultura Flor de Cactus",
-        precio: "$45.000",
-        categoria: "esculturas",
-        destacado: true,
-        img: "https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?auto=format&fit=crop&q=80&w=600",
-        miniaturas: [
-          "https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?auto=format&fit=crop&q=80&w=600",
-          "https://images.unsplash.com/photo-1606744824163-985d376605aa?auto=format&fit=crop&q=80&w=600"
-        ],
-        materiales: "Arcilla polimérica modelada, base de madera recuperada, esmaltes acrílicos",
-        tamano: "Alto 22 cm, Ancho 12 cm",
-        descripcion: "Escultura única modelada totalmente a mano y pintada al detalle con pinceles finos. Representa la floración nocturna de los desiertos americanos, con colores vibrantes y acabado de barniz semimate."
-      },
-      {
-        id: 5,
-        nombre: "Sombrero U. del Arte",
-        precio: "$35.000",
-        categoria: "sombreros",
-        destacado: true,
-        img: "https://images.unsplash.com/photo-1514327605112-b887c0e61c0a?auto=format&fit=crop&q=80&w=600",
-        miniaturas: [
-          "https://images.unsplash.com/photo-1514327605112-b887c0e61c0a?auto=format&fit=crop&q=80&w=600",
-          "https://images.unsplash.com/photo-1533055640609-24b498dfd74c?auto=format&fit=crop&q=80&w=600"
-        ],
-        materiales: "Fieltro de lana premium, pintura acrílica textil, banda de gamuza",
-        tamano: "Talla M (57-58 cm de circunferencia)",
-        descripcion: "Sombrero estilo universitario con diseño exclusivo pintado de forma libre sobre el ala. Resistente al agua suave y decorado con pluma decorativa. Perfecto para graduaciones o looks urbanos con carácter."
-      },
-      {
-        id: 6,
-        nombre: "Pulsera Tierra",
-        precio: "$12.000",
-        categoria: "pulseras",
-        destacado: false,
-        img: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&q=80&w=600",
-        miniaturas: [
-          "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&q=80&w=600"
-        ],
-        materiales: "Cuentas de terracota pulida, hilos de yute trenzado",
-        tamano: "Ajustable de 15 a 22 cm",
-        descripcion: "Sencilla, rústica y con una textura maravillosa. Esta pulsera utiliza pequeñas bolitas de arcilla cocida y pulida directamente por artesanos locales en hornos de leña tradicionales."
-      },
-      {
-        id: 7,
-        nombre: "Sombrero de Paja 'Atardecer'",
-        precio: "$39.000",
-        categoria: "sombreros",
-        destacado: false,
-        img: "https://images.unsplash.com/photo-1533055640609-24b498dfd74c?auto=format&fit=crop&q=80&w=600",
-        miniaturas: [
-          "https://images.unsplash.com/photo-1533055640609-24b498dfd74c?auto=format&fit=crop&q=80&w=600",
-          "https://images.unsplash.com/photo-1514327605112-b887c0e61c0a?auto=format&fit=crop&q=80&w=600"
-        ],
-        materiales: "Paja toquilla natural tejida a mano, teñido con tintes vegetales degradados",
-        tamano: "Talla L (59-60 cm)",
-        descripcion: "Ideal para días de sol radiante. La copa cuenta con un calado transpirable y el ala ancha exhibe un hermoso degradado en tonos terracotas y amarillos pintado a pincel seco."
-      },
-      {
-        id: 8,
-        nombre: "Escultura Pequeña Madre Tierra",
-        precio: "$48.000",
-        categoria: "esculturas",
-        destacado: false,
-        img: "https://images.unsplash.com/photo-1606744824163-985d376605aa?auto=format&fit=crop&q=80&w=600",
-        miniaturas: [
-          "https://images.unsplash.com/photo-1606744824163-985d376605aa?auto=format&fit=crop&q=80&w=600"
-        ],
-        materiales: "Gres esmaltado, incrustaciones de cuarzo blanco natural",
-        tamano: "Alto 15 cm",
-        descripcion: "Una figura de abstracción orgánica que celebra la femineidad y la fertilidad de la tierra. Se moldea sin herramientas mecánicas, dejando sutiles huellas de la artesana que la convierten en una pieza profundamente íntima."
-      },
-      {
-        id: 9,
-        nombre: "Pulsera de Semillas y Jade",
-        precio: "$18.500",
-        categoria: "pulseras",
-        destacado: false,
-        img: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&q=80&w=600",
-        miniaturas: [
-          "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&q=80&w=600"
-        ],
-        materiales: "Cuentas de jade patagónico, semillas de huayruro, cuero de curtido vegetal",
-        tamano: "Diámetro ajustable",
-        descripcion: "Fusión de amuletos tradicionales. Las semillas de huayruro brindan protección mientras que el jade verde aporta balance. El cuero está suavizado para evitar roces molestos."
-      },
-      {
-        id: 10,
-        nombre: "Atrapasueños Guardián Nocturno",
-        precio: "$32.000",
-        categoria: "atrapasuenos",
-        destacado: false,
-        img: "https://images.unsplash.com/photo-1502224562085-639556652f33?auto=format&fit=crop&q=80&w=600",
-        miniaturas: [
-          "https://images.unsplash.com/photo-1502224562085-639556652f33?auto=format&fit=crop&q=80&w=600"
-        ],
-        materiales: "Sauce llorón teñido de negro, plumas de búho sintéticas de alta gama, obsidiana",
-        tamano: "Diámetro 30 cm, Largo total 75 cm",
-        descripcion: "Una variante majestuosa con tonos oscuros y plumas sutiles. La obsidiana central sirve para desviar energías no deseadas del espacio de descanso, creando un rincón de meditación inmejorable."
-      },
-      {
-        id: 11,
-        nombre: "Jarrón Pintado 'Río de Barro'",
-        precio: "$55.000",
-        categoria: "esculturas",
-        destacado: false,
-        img: "https://images.unsplash.com/photo-1612196808214-b8e1d6145a8c?auto=format&fit=crop&q=80&w=600",
-        miniaturas: [
-          "https://images.unsplash.com/photo-1612196808214-b8e1d6145a8c?auto=format&fit=crop&q=80&w=600"
-        ],
-        materiales: "Cerámica cocida a alta temperatura, óxidos metálicos, arcilla roja",
-        tamano: "Alto 28 cm, Diámetro boca 8 cm",
-        descripcion: "Jarrón de líneas sobrias pintado utilizando técnicas de escurrido de barbotina coloreada. Su diseño evoca los cursos de los ríos pampeanos en épocas de lluvia. Apto para contener agua."
-      },
-      {
-        id: 12,
-        nombre: "Sombrero Universitario de Gala",
-        precio: "$42.000",
-        categoria: "sombreros",
-        destacado: false,
-        img: "https://images.unsplash.com/photo-1533055640609-24b498dfd74c?auto=format&fit=crop&q=80&w=600",
-        miniaturas: [
-          "https://images.unsplash.com/photo-1533055640609-24b498dfd74c?auto=format&fit=crop&q=80&w=600"
-        ],
-        materiales: "Fieltro de pelo de conejo simulado, cinta de raso verde oliva, costuras bordadas",
-        tamano: "Talla M (58 cm)",
-        descripcion: "Un clásico renovado. Posee detalles bordados en el contorno del ala con hilos de seda dorados y verde oliva suave. Elegante, con gran presencia y estructura firme."
-      }
+    const productos = [ /* 12 productos originales (se conservan sus datos) */ 
+      {id:1,nombre:"Pulsera Maya",precio:"$15.000",categoria:"pulseras",destacado:true,img:"https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&q=80&w=600",miniaturas:["https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&q=80&w=600","https://images.unsplash.com/photo-1573408301185-9146fe634ad0?auto=format&fit=crop&q=80&w=600","https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&q=80&w=600"],materiales:"Hilo de algodón natural, mostacillas",tamano:"18 cm ajustable",descripcion:"Inspirada en textilerías tradicionales."},
+      {id:2,nombre:"Atrapasueños Bosque Sagrado",precio:"$28.500",categoria:"atrapasuenos",destacado:true,img:"https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&q=80&w=600",miniaturas:["https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&q=80&w=600","https://images.unsplash.com/photo-1502224562085-639556652f33?auto=format&fit=crop&q=80&w=600"],materiales:"Aro de sauce, hilos de cáñamo, plumas éticas",tamano:"Diámetro 25 cm",descripcion:"Armoniza ambientes, tejido tradicional Ojibwa."},
+      {id:3,nombre:"Atrapasueños Brisa de Verano",precio:"$24.000",categoria:"atrapasuenos",destacado:false,img:"https://images.unsplash.com/photo-1594498653385-d527259017ef?auto=format&fit=crop&q=80&w=600",miniaturas:["https://images.unsplash.com/photo-1594498653385-d527259017ef?auto=format&fit=crop&q=80&w=600"],materiales:"Bambú, encaje de algodón reciclado, amatista",tamano:"20 cm diámetro",descripcion:"Liviano, ideal para espacios luminosos."},
+      {id:4,nombre:"Escultura Flor de Cactus",precio:"$45.000",categoria:"esculturas",destacado:true,img:"https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?auto=format&fit=crop&q=80&w=600",miniaturas:["https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?auto=format&fit=crop&q=80&w=600","https://images.unsplash.com/photo-1606744824163-985d376605aa?auto=format&fit=crop&q=80&w=600"],materiales:"Arcilla polimérica, base de madera",tamano:"Alto 22 cm",descripcion:"Escultura única pintada a mano."},
+      {id:5,nombre:"Sombrero U. del Arte",precio:"$35.000",categoria:"sombreros",destacado:true,img:"https://images.unsplash.com/photo-1514327605112-b887c0e61c0a?auto=format&fit=crop&q=80&w=600",miniaturas:["https://images.unsplash.com/photo-1514327605112-b887c0e61c0a?auto=format&fit=crop&q=80&w=600","https://images.unsplash.com/photo-1533055640609-24b498dfd74c?auto=format&fit=crop&q=80&w=600"],materiales:"Fieltro de lana premium, pintura textil",tamano:"Talla M (57-58cm)",descripcion:"Diseño exclusivo pintado a mano."},
+      {id:6,nombre:"Pulsera Tierra",precio:"$12.000",categoria:"pulseras",destacado:false,img:"https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&q=80&w=600",miniaturas:["https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&q=80&w=600"],materiales:"Cuentas de terracota, yute",tamano:"Ajustable 15-22cm",descripcion:"Rústica, textura artesanal."},
+      {id:7,nombre:"Sombrero de Paja 'Atardecer'",precio:"$39.000",categoria:"sombreros",destacado:false,img:"https://images.unsplash.com/photo-1533055640609-24b498dfd74c?auto=format&fit=crop&q=80&w=600",miniaturas:["https://images.unsplash.com/photo-1533055640609-24b498dfd74c?auto=format&fit=crop&q=80&w=600","https://images.unsplash.com/photo-1514327605112-b887c0e61c0a?auto=format&fit=crop&q=80&w=600"],materiales:"Paja toquilla tejida, tintes naturales",tamano:"Talla L (59-60cm)",descripcion:"Degradado en tonos terracota."},
+      {id:8,nombre:"Escultura Pequeña Madre Tierra",precio:"$48.000",categoria:"esculturas",destacado:false,img:"https://images.unsplash.com/photo-1606744824163-985d376605aa?auto=format&fit=crop&q=80&w=600",miniaturas:["https://images.unsplash.com/photo-1606744824163-985d376605aa?auto=format&fit=crop&q=80&w=600"],materiales:"Gres esmaltado, cuarzo blanco",tamano:"Alto 15 cm",descripcion:"Figura orgánica, celebra la tierra."},
+      {id:9,nombre:"Pulsera de Semillas y Jade",precio:"$18.500",categoria:"pulseras",destacado:false,img:"https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&q=80&w=600",miniaturas:["https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&q=80&w=600"],materiales:"Jade patagónico, semillas huayruro",tamano:"Ajustable",descripcion:"Amuleto de protección."},
+      {id:10,nombre:"Atrapasueños Guardián Nocturno",precio:"$32.000",categoria:"atrapasuenos",destacado:false,img:"https://images.unsplash.com/photo-1502224562085-639556652f33?auto=format&fit=crop&q=80&w=600",miniaturas:["https://images.unsplash.com/photo-1502224562085-639556652f33?auto=format&fit=crop&q=80&w=600"],materiales:"Sauce negro, obsidiana",tamano:"30 cm diámetro",descripcion:"Energía protectora."},
+      {id:11,nombre:"Jarrón Pintado 'Río de Barro'",precio:"$55.000",categoria:"esculturas",destacado:false,img:"https://images.unsplash.com/photo-1612196808214-b8e1d6145a8c?auto=format&fit=crop&q=80&w=600",miniaturas:["https://images.unsplash.com/photo-1612196808214-b8e1d6145a8c?auto=format&fit=crop&q=80&w=600"],materiales:"Cerámica cocida, óxidos",tamano:"Alto 28 cm",descripcion:"Inspirado en ríos."},
+      {id:12,nombre:"Sombrero Universitario de Gala",precio:"$42.000",categoria:"sombreros",destacado:false,img:"https://images.unsplash.com/photo-1533055640609-24b498dfd74c?auto=format&fit=crop&q=80&w=600",miniaturas:["https://images.unsplash.com/photo-1533055640609-24b498dfd74c?auto=format&fit=crop&q=80&w=600"],materiales:"Fieltro, cinta de raso",tamano:"Talla M",descripcion:"Elegante bordado a mano."}
     ];
-
-    // INICIALIZACIÓN DEL SITIO AL CARGAR EL DOM
-    window.onload = function() {
-      renderFeatured();
-      renderCatalogo('todos');
-      
-      // Mostrar la página de inicio por defecto
-      showPage('home');
-    };
-
-    // NAVEGACIÓN ENTRE PÁGINAS (Sin recargar, gestionando clases hidden)
-    function showPage(pageId) {
-      // Ocultar todas las páginas
-      document.querySelectorAll('.page-view').forEach(view => {
-        view.classList.add('hidden');
-      });
-
-      // Mostrar la página seleccionada
-      const targetPage = document.getElementById(`page-${pageId}`);
-      if (targetPage) {
-        targetPage.classList.remove('hidden');
-      }
-
-      // Actualizar el estado visual del Menú Superior
-      document.querySelectorAll('.nav-btn').forEach(btn => {
-        btn.classList.remove('text-art-accent', 'border-art-accent');
-        btn.classList.add('text-art-text', 'border-transparent');
-      });
-
-      const activeNav = document.getElementById(`nav-${pageId}`);
-      if (activeNav) {
-        activeNav.classList.remove('text-art-text', 'border-transparent');
-        activeNav.classList.add('text-art-accent', 'border-art-accent');
-      }
-
-      // Hacer scroll hacia arriba suave
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    // MENÚ MÓVIL DESPLEGABLE
-    function toggleMobileMenu() {
-      const menu = document.getElementById('mobile-menu');
-      menu.classList.toggle('hidden');
-    }
-
-    // SCROLL SUAVE DESDE EL HERO A LOS DESTACADOS
-    function scrollToFeatured() {
-      const elem = document.getElementById('featured-products');
-      elem.scrollIntoView({ behavior: 'smooth' });
-    }
-
-    // RENDERIZAR PRODUCTOS DESTACADOS (PÁGINA INICIO)
-    function renderFeatured() {
-      const featuredGrid = document.getElementById('featured-grid');
-      featuredGrid.innerHTML = '';
-
-      const itemsDestacados = productos.filter(p => p.destacado);
-
-      itemsDestacados.forEach(prod => {
-        featuredGrid.appendChild(createProductCard(prod));
-      });
-    }
-
-    // CREACIÓN DE TARJETAS DE PRODUCTO (REUTILIZABLE)
-    function createProductCard(prod) {
-      const card = document.createElement('div');
-      card.className = "bg-white rounded-2xl border border-art-border overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:shadow-xl group cursor-pointer flex flex-col justify-between";
-      card.setAttribute('onclick', `showProductDetails(${prod.id})`);
-
-      // Mapeo amigable de nombres de categoría
-      const catNombres = {
-        'pulseras': '📿 Pulsera',
-        'atrapasuenos': '🕸️ Atrapasueños',
-        'esculturas': '🏺 Escultura',
-        'sombreros': '🎓 Sombrero'
-      };
-
-      card.innerHTML = `
-        <div>
-          <!-- Contenedor Imagen -->
-          <div class="relative h-64 bg-art-bg overflow-hidden">
-            <img src="${prod.img}" alt="[Imagen de ${prod.nombre}]" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" onerror="this.src='https://placehold.co/600x400?text=${encodeURIComponent(prod.nombre)}'">
-            <span class="absolute top-3 left-3 bg-white/90 backdrop-blur-sm text-art-text text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full shadow-sm">
-              ${catNombres[prod.categoria] || prod.categoria}
-            </span>
-          </div>
-          
-          <!-- Datos -->
-          <div class="p-5 space-y-1">
-            <h3 class="font-serif font-bold text-art-text text-lg leading-snug group-hover:text-art-accent transition-colors">${prod.nombre}</h3>
-            <p class="text-xs text-art-text/50 line-clamp-2 mt-1">${prod.descripcion}</p>
-          </div>
-        </div>
-
-        <!-- Precio y CTA -->
-        <div class="px-5 pb-5 pt-2 flex items-center justify-between border-t border-art-bg">
-          <span class="text-xl font-bold text-art-accent">${prod.precio}</span>
-          <span class="text-xs text-art-secondary font-semibold border border-art-secondary/30 group-hover:bg-art-secondary group-hover:text-white px-3 py-1.5 rounded-full transition-all duration-300">
-            Ver Detalle <i class="fa-solid fa-chevron-right ml-1 text-[8px]"></i>
-          </span>
-        </div>
-      `;
-
-      return card;
-    }
-
-    // RENDERIZAR PRODUCTOS DEL CATÁLOGO COMPLETO CON FILTROS
-    function renderCatalogo(categoriaSeleccionada) {
-      const grid = document.getElementById('catalogo-grid');
-      const emptyState = document.getElementById('empty-catalog-state');
-      grid.innerHTML = '';
-
-      const filtrados = categoriaSeleccionada === 'todos' 
-        ? productos 
-        : productos.filter(p => p.categoria === categoriaSeleccionada);
-
-      if (filtrados.length === 0) {
-        grid.classList.add('hidden');
-        emptyState.classList.remove('hidden');
-      } else {
-        grid.classList.remove('hidden');
-        emptyState.classList.add('hidden');
-
-        filtrados.forEach(prod => {
-          grid.appendChild(createProductCard(prod));
-        });
-      }
-    }
-
-    // ACCIÓN DE FILTRADO POR BOTÓN
-    function filterCategory(catId) {
-      // Actualizar botones de filtro
-      document.querySelectorAll('#category-filters .category-btn').forEach(btn => {
-        btn.classList.remove('active', 'bg-art-accent', 'text-white', 'border-art-accent');
-        btn.classList.add('bg-white', 'text-art-text', 'border-art-border', 'hover:border-art-accent', 'hover:text-art-accent');
-      });
-
-      const activeBtn = document.querySelector(`#category-filters [data-cat="${catId}"]`);
-      if (activeBtn) {
-        activeBtn.classList.remove('bg-white', 'text-art-text', 'border-art-border');
-        activeBtn.classList.add('active', 'bg-art-accent', 'text-white', 'border-art-accent');
-      }
-
-      // Renderizar productos
-      renderCatalogo(catId);
-    }
-
-    // VER DETALLES DE UN PRODUCTO ESPECÍFICO (ABRE PÁGINA 3)
-    function showProductDetails(prodId) {
-      const prod = productos.find(p => p.id === prodId);
-      if (!prod) return;
-
-      // Actualizar textos y contenidos
-      document.getElementById('detail-title').innerText = prod.nombre;
-      document.getElementById('detail-price').innerText = prod.precio;
-      document.getElementById('detail-desc').innerText = prod.descripcion;
-      document.getElementById('detail-materials').innerText = prod.materials;
-      document.getElementById('detail-size').innerText = prod.tamano;
-      
-      const catNombres = {
-        'pulseras': '📿 Pulseras',
-        'atrapasuenos': '🕸️ Atrapasueños',
-        'esculturas': '🏺 Esculturas',
-        'sombreros': '🎓 Sombreros'
-      };
-      document.getElementById('detail-category-badge').innerText = catNombres[prod.categoria] || prod.categoria;
-
-      // Configurar imagen principal
-      const mainImg = document.getElementById('detail-main-img');
-      mainImg.src = prod.img;
-      mainImg.alt = `[Imagen de ${prod.nombre}]`;
-
-      // Cargar miniaturas de la galería interactiva
-      const thumbContainer = document.getElementById('detail-thumbnails');
-      thumbContainer.innerHTML = '';
-
-      prod.miniaturas.forEach((imgUrl, idx) => {
-        const thumbBtn = document.createElement('button');
-        thumbBtn.className = `w-16 h-16 md:w-20 md:h-20 rounded-xl overflow-hidden border-2 transition-all flex-shrink-0 ${idx === 0 ? 'border-art-accent' : 'border-art-border hover:border-art-accent/50'}`;
-        thumbBtn.innerHTML = `<img src="${imgUrl}" alt="Miniatura ${idx + 1}" class="w-full h-full object-cover">`;
-        thumbBtn.onclick = function() {
-          // Remover borde activo de otras miniaturas
-          thumbContainer.querySelectorAll('button').forEach(btn => btn.classList.remove('border-art-accent'));
-          thumbContainer.querySelectorAll('button').forEach(btn => btn.classList.add('border-art-border'));
-          // Añadir borde activo
-          thumbBtn.classList.remove('border-art-border');
-          thumbBtn.classList.add('border-art-accent');
-          // Actualizar imagen principal
-          mainImg.src = imgUrl;
-        };
-        thumbContainer.appendChild(thumbBtn);
-      });
-
-      // Configurar mensaje de simulación de WhatsApp
-      const celular = "+5491112345678";
-      const mensajePredefinido = `Hola ArteManos! Me encantó la pieza única "${prod.nombre}" (${prod.precio}) de la categoría de ${catNombres[prod.categoria]}. ¿Sigue disponible para envío? Muchas gracias.`;
-      
-      // Enlace codificado
-      const urlWhatsapp = `https://wa.me/${celular}?text=${encodeURIComponent(mensajePredefinido)}`;
-      
-      document.getElementById('detail-whatsapp-link').href = urlWhatsapp;
-      document.getElementById('detail-whatsapp-preview').innerText = mensajePredefinido;
-
-      // Generar recomendaciones horizontales (Misma categoría o aleatorios)
-      renderSimilares(prod.categoria, prod.id);
-
-      // Cambiar de pantalla a Detalle
-      showPage('detalle');
-    }
-
-    // CARGAR PRODUCTOS SIMILARES (Carrusel interactivo abajo del detalle)
-    function renderSimilares(categoria, idActual) {
-      const carousel = document.getElementById('similar-products-carousel');
-      carousel.innerHTML = '';
-
-      // Filtrar por categoría, excluyendo el producto actual
-      let similares = productos.filter(p => p.categoria === categoria && p.id !== idActual);
-
-      // Si no hay suficientes similares de la misma categoría, agregar otros aleatorios
-      if (similares.length < 3) {
-        const extras = productos.filter(p => p.id !== idActual && !similares.includes(p));
-        similares = [...similares, ...extras].slice(0, 4);
-      }
-
-      similares.forEach(prod => {
-        const simCard = document.createElement('div');
-        simCard.className = "flex-shrink-0 w-64 snap-start bg-white rounded-2xl border border-art-border overflow-hidden cursor-pointer transition-all hover:scale-[1.01] hover:shadow-md group";
-        simCard.setAttribute('onclick', `showProductDetails(${prod.id})`);
-
-        simCard.innerHTML = `
-          <div class="h-40 bg-art-bg overflow-hidden relative">
-            <img src="${prod.img}" alt="[Imagen de ${prod.nombre}]" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" onerror="this.src='https://placehold.co/400x300?text=${encodeURIComponent(prod.nombre)}'">
-          </div>
-          <div class="p-4 space-y-1">
-            <h4 class="font-serif font-bold text-art-text text-sm truncate group-hover:text-art-accent transition-colors">${prod.nombre}</h4>
-            <div class="flex justify-between items-center pt-2">
-              <span class="text-base font-bold text-art-accent">${prod.precio}</span>
-              <span class="text-[10px] font-medium text-art-secondary uppercase">Ver artículo</span>
-            </div>
-          </div>
-        `;
-        carousel.appendChild(simCard);
-      });
-    }
+    function showPage(p){document.querySelectorAll('.page-view').forEach(v=>v.classList.add('hidden'));document.getElementById(`page-${p}`).classList.remove('hidden');document.querySelectorAll('.nav-btn').forEach(b=>{b.classList.remove('text-art-accent','border-art-accent');b.classList.add('text-art-text','border-transparent')});let n=document.getElementById(`nav-${p}`);if(n){n.classList.remove('text-art-text','border-transparent');n.classList.add('text-art-accent','border-art-accent')}window.scrollTo({top:0,behavior:'smooth'})}
+    function toggleMobileMenu(){document.getElementById('mobile-menu').classList.toggle('hidden')}
+    function scrollToFeatured(){document.getElementById('featured-products').scrollIntoView({behavior:'smooth'})}
+    function createProductCard(p){let c=document.createElement('div');c.className="bg-white rounded-2xl border border-art-border overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:shadow-xl group cursor-pointer flex flex-col justify-between";c.setAttribute('onclick',`showProductDetails(${p.id})`);let cats={pulseras:'📿 Pulsera',atrapasuenos:'🕸️ Atrapasueños',esculturas:'🏺 Escultura',sombreros:'🎓 Sombrero'};c.innerHTML=`<div><div class="relative h-64 bg-art-bg overflow-hidden"><img src="${p.img}" alt="${p.nombre}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"><span class="absolute top-3 left-3 bg-white/90 text-art-text text-[10px] font-bold uppercase px-2.5 py-1 rounded-full">${cats[p.categoria]||p.categoria}</span></div><div class="p-5 space-y-1"><h3 class="font-serif font-bold text-art-text text-lg group-hover:text-art-accent">${p.nombre}</h3><p class="text-xs text-art-text/50 line-clamp-2 mt-1">${p.descripcion.slice(0,70)}</p></div></div><div class="px-5 pb-5 pt-2 flex items-center justify-between border-t border-art-bg"><span class="text-xl font-bold text-art-accent">${p.precio}</span><span class="text-xs text-art-secondary font-semibold border border-art-secondary/30 group-hover:bg-art-secondary group-hover:text-white px-3 py-1.5 rounded-full">Ver Detalle <i class="fa-solid fa-chevron-right ml-1 text-[8px]"></i></span></div>`;return c}
+    function renderFeatured(){let g=document.getElementById('featured-grid');g.innerHTML='';productos.filter(p=>p.destacado).forEach(p=>g.appendChild(createProductCard(p)));}
+    function renderCatalogo(cat){let g=document.getElementById('catalogo-grid'),e=document.getElementById('empty-catalog-state');g.innerHTML='';let f=cat==='todos'?productos:productos.filter(p=>p.categoria===cat);if(f.length===0){g.classList.add('hidden');e.classList.remove('hidden')}else{g.classList.remove('hidden');e.classList.add('hidden');f.forEach(p=>g.appendChild(createProductCard(p)))}}
+    function filterCategory(c){document.querySelectorAll('#category-filters .category-btn').forEach(b=>{b.classList.remove('active','bg-art-accent','text-white','border-art-accent');b.classList.add('bg-white','text-art-text','border-art-border')});let a=document.querySelector(`#category-filters [data-cat="${c}"]`);if(a){a.classList.remove('bg-white','text-art-text','border-art-border');a.classList.add('active','bg-art-accent','text-white','border-art-accent')}renderCatalogo(c);}
+    function showProductDetails(id){let p=productos.find(x=>x.id===id);if(!p)return;document.getElementById('detail-title').innerText=p.nombre;document.getElementById('detail-price').innerText=p.precio;document.getElementById('detail-desc').innerText=p.descripcion;document.getElementById('detail-materials').innerText=p.materiales;document.getElementById('detail-size').innerText=p.tamano;let cats={pulseras:'📿 Pulseras',atrapasuenos:'🕸️ Atrapasueños',esculturas:'🏺 Esculturas',sombreros:'🎓 Sombreros'};document.getElementById('detail-category-badge').innerText=cats[p.categoria]||p.categoria;let main=document.getElementById('detail-main-img');main.src=p.img;let thumb=document.getElementById('detail-thumbnails');thumb.innerHTML='';p.miniaturas.forEach((url,i)=>{let btn=document.createElement('button');btn.className=`w-16 h-16 md:w-20 md:h-20 rounded-xl overflow-hidden border-2 flex-shrink-0 ${i===0?'border-art-accent':'border-art-border hover:border-art-accent/50'}`;btn.innerHTML=`<img src="${url}" class="w-full h-full object-cover">`;btn.onclick=()=>{thumb.querySelectorAll('button').forEach(b=>b.classList.remove('border-art-accent'));thumb.querySelectorAll('button').forEach(b=>b.classList.add('border-art-border'));btn.classList.remove('border-art-border');btn.classList.add('border-art-accent');main.src=url;};thumb.appendChild(btn)});let msg=`Hola Gavy Montez! Me encantó la pieza única "${p.nombre}" (${p.precio}). ¿Está disponible para envío? Muchas gracias.`;document.getElementById('detail-whatsapp-link').href=`https://wa.me/5358481876?text=${encodeURIComponent(msg)}`;renderSimilares(p.categoria,p.id);showPage('detalle');}
+    function renderSimilares(cat,idActual){let car=document.getElementById('similar-products-carousel');car.innerHTML='';let sim=productos.filter(p=>p.categoria===cat&&p.id!==idActual);if(sim.length<3){let extras=productos.filter(p=>p.id!==idActual&&!sim.includes(p));sim=[...sim,...extras].slice(0,4)}sim.forEach(p=>{let card=document.createElement('div');card.className="flex-shrink-0 w-64 snap-start bg-white rounded-2xl border border-art-border overflow-hidden cursor-pointer transition-all hover:shadow-md group";card.setAttribute('onclick',`showProductDetails(${p.id})`);card.innerHTML=`<div class="h-40 bg-art-bg overflow-hidden"><img src="${p.img}" class="w-full h-full object-cover group-hover:scale-105 transition"></div><div class="p-4"><h4 class="font-serif font-bold text-art-text text-sm truncate group-hover:text-art-accent">${p.nombre}</h4><div class="flex justify-between items-center pt-2"><span class="text-base font-bold text-art-accent">${p.precio}</span><span class="text-[10px] font-medium text-art-secondary uppercase">Ver</span></div></div>`;car.appendChild(card)});}
+    window.onload=()=>{renderFeatured();renderCatalogo('todos');showPage('home');};
   </script>
-
 </body>
 </html>
