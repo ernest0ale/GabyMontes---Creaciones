@@ -13,11 +13,17 @@
   --hero-bg: #EAE0D1;
   --card-text-primary: rgb(74, 55, 68);
   --card-text-secondary: rgb(172, 163, 156);
+  --detail-text-primary: rgb(74, 55, 40);
+  --detail-title-descrip: rgb(146, 135, 126);
+  --detail-text-desc: rgb(122, 108, 97);
+  --detail-panel-caract: rgb(253, 248, 240);
+  --detail-title-caract: rgb(163, 151, 140);
+  --detail-text-caract: rgb(132, 103, 61);
 }
 
 body.dark-mode {
   --bg-primary: rgb(54, 36, 7);
-  --surface: rgb(54, 36, 8);
+  --surface: rgb(54, 36, 7);
   --footer-bg: rgb(24, 26, 27);
   --footer-text-primary: rgb(232, 230, 227);
   --footer-text-secondary: rgb(170, 169, 139);
@@ -29,6 +35,12 @@ body.dark-mode {
   --hero-bg: rgb(63, 49, 29);
   --card-text-primary: rgb(209, 187, 170);
   --card-text-secondary: rgb(110, 101, 93);
+  --detail-text-primary: rgb(209, 187, 170);
+  --detail-title-descrip: rgb(135, 123, 111);
+  --detail-text-desc: rgb(162, 145, 133);
+  --detail-panel-caract: rgb(54, 36, 7);
+  --detail-title-caract: rgb(124, 112, 89);
+  --detail-text-caract: rgb(197, 174, 158);
 }
 
 * {
@@ -86,6 +98,13 @@ button, .category-btn, .nav-link, .footer-link, .footer-contact {
 }
 .product-card p {
   color: var(--card-text-secondary);
+}
+
+/* Panel de detalles */
+.detail-panel {
+  background-color: var(--detail-panel-caract);
+  border-radius: 1rem;
+  padding: 1rem;
 }
 
 /* Mapa modo oscuro */
