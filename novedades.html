@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Gavy Montez – Novedades</title>
+  <title>Novedades | Gavy Montez</title>
   
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -28,43 +28,40 @@
 </head>
 <body class="min-h-screen flex flex-col antialiased">
 
-  <header class="sticky top-0 z-40 bg-[#FDF8F0]/95 backdrop-blur-md border-b border-art-border shadow-sm">
+  <header class="sticky top-0 z-40 backdrop-blur-md border-b shadow-sm" style="background-color: var(--surface); border-color: var(--border);">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="h-20 flex items-center justify-between">
         
-        <a href="index.html" class="flex items-center gap-2 group flex-shrink-0">
-          <div class="w-10 h-10 rounded-full bg-art-accent flex items-center justify-center text-white text-xl font-serif">GM</div>
-          <span class="text-xl md:text-2xl font-serif font-bold text-art-text tracking-wide transition-colors group-hover:text-art-accent">Gavy Montez</span>
+        <div class="md:hidden flex items-center">
+          <button onclick="toggleMobileMenu()" class="focus:outline-none p-2" style="color: var(--text-primary);">
+            <i class="fa-solid fa-bars text-2xl"></i>
+          </button>
+        </div>
+
+        <a href="index.html" class="flex items-center gap-2 group flex-shrink-0 md:ml-0 ml-2">
+          <div class="w-10 h-10 rounded-full flex items-center justify-center text-white text-xl font-serif" style="background-color: var(--accent);">GM</div>
+          <span class="text-xl md:text-2xl font-serif font-bold tracking-wide" style="color: var(--text-primary);">Gavy Montez</span>
         </a>
 
         <nav class="hidden md:flex items-center justify-center flex-1 space-x-8">
-          <a href="index.html" class="nav-link text-art-text hover:text-art-accent font-medium text-base pb-1 border-b-2 border-transparent transition-all duration-300 ease hover:pl-2">Inicio</a>
-          <a href="novedades.html" class="nav-link text-art-accent border-b-2 border-art-accent font-medium text-base pb-1 transition-all duration-300 ease hover:pl-2">Novedades</a>
-          <a href="catalogo.html" class="nav-link text-art-text hover:text-art-accent font-medium text-base pb-1 border-b-2 border-transparent transition-all duration-300 ease hover:pl-2">Catálogo</a>
-          <a href="contacto.html" class="nav-link text-art-text hover:text-art-accent font-medium text-base pb-1 border-b-2 border-transparent transition-all duration-300 ease hover:pl-2">Contacto</a>
+          <a href="index.html" class="nav-link font-medium text-base transition-all duration-300" style="color: var(--text-primary);"><i class="fa-solid fa-house"></i> Inicio</a>
+          <a href="novedades.html" class="nav-link active font-medium text-base transition-all duration-300" style="color: var(--text-primary);"><i class="fa-regular fa-star"></i> Novedades</a>
+          <a href="catalogo.html" class="nav-link font-medium text-base transition-all duration-300" style="color: var(--text-primary);"><i class="fa-regular fa-rectangle-list"></i> Catálogo</a>
+          <a href="contacto.html" class="nav-link font-medium text-base transition-all duration-300" style="color: var(--text-primary);"><i class="fa-regular fa-address-card"></i> Contacto</a>
         </nav>
 
-        <div class="hidden md:block flex-shrink-0">
-          <a href="novedades.html" class="bg-art-secondary hover:bg-[#79986A] text-white px-5 py-2.5 rounded-full font-medium transition-transform active:scale-95 text-sm flex items-center gap-2">
-            <i class="fa-solid fa-star"></i> Novedades
-          </a>
-        </div>
-
-        <div class="md:hidden flex items-center">
-          <button onclick="toggleMobileMenu()" class="text-art-text hover:text-art-accent focus:outline-none p-2">
-            <i class="fa-solid fa-bars text-2xl"></i>
+        <div class="flex items-center gap-3 flex-shrink-0">
+          <button id="theme-toggle" class="w-10 h-10 rounded-full transition-all duration-300 flex items-center justify-center" style="background-color: var(--surface); color: var(--accent); border: 1px solid var(--border);">
+            <i id="theme-icon" class="fa-regular fa-moon text-xl"></i>
           </button>
         </div>
       </div>
 
-      <div id="mobile-menu" class="hidden md:hidden bg-art-bg border-b border-art-border py-4 px-6 space-y-4 shadow-inner">
-        <a href="index.html" class="block w-full text-left font-serif text-lg text-art-text hover:text-art-accent py-2 border-b border-art-border/50">Inicio</a>
-        <a href="novedades.html" class="block w-full text-left font-serif text-lg text-art-text hover:text-art-accent py-2 border-b border-art-border/50">Novedades</a>
-        <a href="catalogo.html" class="block w-full text-left font-serif text-lg text-art-text hover:text-art-accent py-2 border-b border-art-border/50">Catálogo</a>
-        <a href="contacto.html" class="block w-full text-left font-serif text-lg text-art-text hover:text-art-accent py-2">Contacto</a>
-        <div class="pt-2">
-          <a href="novedades.html" class="w-full bg-art-accent text-white py-3 rounded-xl font-medium text-center block">Ver Novedades</a>
-        </div>
+      <div id="mobile-menu" class="hidden md:hidden py-4 px-6 space-y-4 shadow-inner" style="background-color: var(--surface); border-color: var(--border);">
+        <a href="index.html" class="flex items-center gap-2 w-full text-left font-serif text-lg py-2 border-b" style="color: var(--text-primary); border-color: var(--border);"><i class="fa-solid fa-house"></i> Inicio</a>
+        <a href="novedades.html" class="flex items-center gap-2 w-full text-left font-serif text-lg py-2 border-b" style="color: var(--text-primary); border-color: var(--border);"><i class="fa-regular fa-star"></i> Novedades</a>
+        <a href="catalogo.html" class="flex items-center gap-2 w-full text-left font-serif text-lg py-2 border-b" style="color: var(--text-primary); border-color: var(--border);"><i class="fa-regular fa-rectangle-list"></i> Catálogo</a>
+        <a href="contacto.html" class="flex items-center gap-2 w-full text-left font-serif text-lg py-2" style="color: var(--text-primary);"><i class="fa-regular fa-address-card"></i> Contacto</a>
       </div>
     </div>
   </header>
@@ -72,69 +69,107 @@
   <main class="flex-grow py-12">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center max-w-2xl mx-auto mb-12">
-        <span class="text-art-accent uppercase tracking-widest text-xs font-bold">Lo último del taller</span>
-        <h1 class="text-4xl font-serif font-bold text-art-text mt-1">Novedades y más populares</h1>
-        <p class="text-art-text/70 mt-3">Descubre nuestras creaciones más recientes y los favoritos de nuestra comunidad.</p>
+        <span class="uppercase tracking-widest text-xs font-bold" style="color: var(--accent);">Lo último del taller</span>
+        <h1 class="text-4xl font-serif font-bold mt-1" style="color: var(--text-primary);">Novedades y más populares</h1>
+        <p class="mt-3" style="color: var(--text-primary); opacity: 0.7;">Descubre nuestras creaciones más recientes y los favoritos de nuestra comunidad.</p>
       </div>
 
-      <!-- Sección: Productos nuevos (últimos 4 por ID descendente) -->
       <div class="mb-16">
         <div class="flex items-center gap-3 mb-6">
-          <span class="text-2xl text-art-accent"><i class="fa-regular fa-clock"></i></span>
-          <h2 class="text-2xl md:text-3xl font-serif font-bold text-art-text">Artículos nuevos</h2>
+          <span class="text-2xl" style="color: var(--accent);"><i class="fa-regular fa-clock"></i></span>
+          <h2 class="text-2xl md:text-3xl font-serif font-bold" style="color: var(--text-primary);">Recientes</h2>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8" id="nuevos-grid"></div>
       </div>
 
-      <!-- Sección: Productos populares (destacados) -->
       <div>
         <div class="flex items-center gap-3 mb-6">
-          <span class="text-2xl text-art-accent"><i class="fa-solid fa-fire"></i></span>
-          <h2 class="text-2xl md:text-3xl font-serif font-bold text-art-text">Más populares</h2>
+          <span class="text-2xl" style="color: var(--accent);"><i class="fa-solid fa-fire"></i></span>
+          <h2 class="text-2xl md:text-3xl font-serif font-bold" style="color: var(--text-primary);">Más popular</h2>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8" id="populares-grid"></div>
       </div>
     </div>
   </main>
 
-  <!-- FOOTER unificado -->
-  <footer class="bg-art-text text-white py-12 border-t border-art-border/20">
+  <footer class="py-12 border-t" style="background-color: var(--footer-bg); border-color: var(--border);">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 pb-8 border-b border-white/10">
-        <div class="space-y-4"><div class="flex items-center gap-2"><div class="w-8 h-8 rounded-full bg-art-accent flex items-center justify-center text-white text-base font-serif">GM</div><span class="text-lg font-serif font-bold tracking-wide">Gavy Montez</span></div><p class="text-sm text-white/70 max-w-sm">Creaciones hechas a mano con Amor. Cada puntada, cada pincelada, lleva esencia cubana.</p></div>
-        <div class="space-y-4"><h4 class="text-sm font-semibold uppercase tracking-wider text-art-accent">Navegación</h4><ul class="space-y-2 text-sm"><li><a href="index.html" class="footer-link text-white/70 hover:text-white transition-all duration-300 ease hover:pl-2">Inicio</a></li><li><a href="novedades.html" class="footer-link text-white/70 hover:text-white transition-all duration-300 ease hover:pl-2">Novedades</a></li><li><a href="catalogo.html" class="footer-link text-white/70 hover:text-white transition-all duration-300 ease hover:pl-2">Catálogo Completo</a></li><li><a href="contacto.html" class="footer-link text-white/70 hover:text-white transition-all duration-300 ease hover:pl-2">Ubicación y Contacto</a></li></ul></div>
-        <div class="space-y-4"><h4 class="text-sm font-semibold uppercase tracking-wider text-art-accent">Canales</h4><ul class="space-y-2 text-sm"><li><a href="https://wa.me/5358481876" target="_blank" class="footer-contact text-white/70 hover:text-white transition-all duration-300 ease hover:pl-2 flex items-center gap-2"><i class="fa-brands fa-whatsapp text-art-accent"></i> +53 58481876</a></li><li><a href="https://instagram.com/gavymontez_creaciones" target="_blank" class="footer-contact text-white/70 hover:text-white transition-all duration-300 ease hover:pl-2 flex items-center gap-2"><i class="fa-brands fa-instagram text-art-accent"></i> @gavymontez_creaciones</a></li><li class="flex items-center gap-2 text-white/70"><i class="fa-solid fa-location-dot text-art-accent"></i> La Lisa, La Habana, Cuba</li></ul></div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 pb-8 border-b text-center md:text-left" style="border-color: rgba(255,255,255,0.1);">
+        <div class="space-y-4 flex flex-col items-center md:items-start">
+          <div class="flex items-center gap-2 justify-center md:justify-start"><div class="w-8 h-8 rounded-full flex items-center justify-center text-white text-base font-serif" style="background-color: var(--accent);">GM</div><span class="text-lg font-serif font-bold tracking-wide text-white">Gavy Montez</span></div>
+          <p class="text-sm text-white/70 max-w-sm text-center md:text-left">Creaciones hechas a mano con Amor. Cada puntada, cada pincelada, lleva esencia cubana.</p>
+        </div>
+        <div class="space-y-4 flex flex-col items-center md:items-start">
+          <h4 class="text-sm font-semibold uppercase tracking-wider text-center md:text-left" style="color: var(--footer-text-primary);">Navegación</h4>
+          <ul class="space-y-2 text-sm text-center md:text-left">
+            <li><a href="index.html" class="footer-link transition-all duration-300" style="color: var(--footer-text-secondary);">Inicio</a></li>
+            <li><a href="novedades.html" class="footer-link transition-all duration-300" style="color: var(--footer-text-secondary);">Novedades</a></li>
+            <li><a href="catalogo.html" class="footer-link transition-all duration-300" style="color: var(--footer-text-secondary);">Catálogo Completo</a></li>
+            <li><a href="contacto.html" class="footer-link transition-all duration-300" style="color: var(--footer-text-secondary);">Ubicación y Contacto</a></li>
+          </ul>
+        </div>
+        <div class="space-y-4 flex flex-col items-center md:items-start">
+          <h4 class="text-sm font-semibold uppercase tracking-wider text-center md:text-left" style="color: var(--footer-text-primary);">Canales</h4>
+          <ul class="space-y-2 text-sm text-center md:text-left">
+            <li><a href="https://wa.me/5358481876" target="_blank" class="footer-contact transition-all duration-300 flex items-center gap-2 justify-center md:justify-start" style="color: var(--footer-text-secondary);"><i class="fa-brands fa-whatsapp" style="color: var(--accent);"></i> +53 58481876</a></li>
+            <li><a href="https://instagram.com/gavymontez_creaciones" target="_blank" class="footer-contact transition-all duration-300 flex items-center gap-2 justify-center md:justify-start" style="color: var(--footer-text-secondary);"><i class="fa-brands fa-instagram" style="color: var(--accent);"></i> @gavymontez_creaciones</a></li>
+            <li class="flex items-center gap-2 justify-center md:justify-start" style="color: var(--footer-text-secondary);"><i class="fa-solid fa-location-dot" style="color: var(--accent);"></i> La Lisa, La Habana, Cuba</li>
+          </ul>
+        </div>
       </div>
-      <div class="pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-white/50 gap-4"><p>© 2025 Gavy Montez · Creaciones hechas a mano con Amor.</p><p class="flex items-center gap-4"><span>Prototipo interactivo</span><span class="w-1.5 h-1.5 rounded-full bg-green-400"></span><span>WhatsApp Activo</span></p></div>
+      <div class="pt-8 flex flex-col md:flex-row justify-between items-center text-xs gap-4 text-center" style="color: var(--footer-text-secondary); opacity: 0.7;">
+        <p>© 2025 Gavy Montez · Creaciones hechas a mano con Amor.</p>
+        <p class="flex items-center gap-4 justify-center"><span>Prototipo interactivo</span><span class="w-1.5 h-1.5 rounded-full bg-green-400"></span><span>WhatsApp Activo</span></p>
+      </div>
     </div>
   </footer>
 
-  <a href="https://wa.me/5358481876" target="_blank" class="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white w-14 h-14 rounded-full flex items-center justify-center text-3xl shadow-xl hover:scale-110 transition"><i class="fa-brands fa-whatsapp"></i></a>
+  <a href="https://wa.me/5358481876" target="_blank" class="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white w-14 h-14 rounded-full flex items-center justify-center text-3xl shadow-xl hover:bg-[#20ba5a] hover:scale-110 transition-all group"><i class="fa-brands fa-whatsapp"></i></a>
 
-  <script src="js/data.js"></script>
-  <script src="js/ui.js"></script>
   <script>
-    function toggleMobileMenu() { document.getElementById('mobile-menu').classList.toggle('hidden'); }
-    
+    function initTheme() {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'dark') {
+        document.body.classList.add('dark-mode');
+        updateThemeIcons('dark');
+      } else {
+        document.body.classList.remove('dark-mode');
+        updateThemeIcons('light');
+      }
+    }
+    function updateThemeIcons(theme) {
+      const icons = document.querySelectorAll('#theme-icon, #theme-icon-mobile');
+      icons.forEach(icon => {
+        if (theme === 'dark') icon.className = 'fa-regular fa-sun text-xl';
+        else icon.className = 'fa-regular fa-moon text-xl';
+      });
+    }
+    function toggleTheme() {
+      if (document.body.classList.contains('dark-mode')) {
+        document.body.classList.remove('dark-mode');
+        localStorage.setItem('theme', 'light');
+        updateThemeIcons('light');
+      } else {
+        document.body.classList.add('dark-mode');
+        localStorage.setItem('theme', 'dark');
+        updateThemeIcons('dark');
+      }
+    }
     document.addEventListener('DOMContentLoaded', function() {
-      // Productos nuevos: últimos 4 por ID (simulando fecha de creación)
-      const nuevos = [...productos].sort((a, b) => b.id - a.id).slice(0, 4);
-      // Productos populares: destacados
-      const populares = productos.filter(p => p.destacado === true);
+      initTheme();
+      document.getElementById('theme-toggle')?.addEventListener('click', toggleTheme);
+      document.getElementById('theme-toggle-mobile')?.addEventListener('click', toggleTheme);
       
+      const nuevos = [...productos].sort((a, b) => b.id - a.id).slice(0, 4);
+      const populares = productos.filter(p => p.destacado === true);
       const nuevosGrid = document.getElementById('nuevos-grid');
       const popularesGrid = document.getElementById('populares-grid');
-      
-      if (nuevosGrid) {
-        nuevosGrid.innerHTML = '';
-        nuevos.forEach(p => nuevosGrid.appendChild(createProductCard(p)));
-      }
-      
-      if (popularesGrid) {
-        popularesGrid.innerHTML = '';
-        populares.forEach(p => popularesGrid.appendChild(createProductCard(p)));
-      }
+      if (nuevosGrid) { nuevosGrid.innerHTML = ''; nuevos.forEach(p => nuevosGrid.appendChild(createProductCard(p))); }
+      if (popularesGrid) { popularesGrid.innerHTML = ''; populares.forEach(p => popularesGrid.appendChild(createProductCard(p))); }
     });
+    function toggleMobileMenu() { document.getElementById('mobile-menu').classList.toggle('hidden'); }
   </script>
+  <script src="js/data.js"></script>
+  <script src="js/ui.js"></script>
 </body>
 </html>

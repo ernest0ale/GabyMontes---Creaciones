@@ -1,8 +1,43 @@
 /* Estilos personalizados para Gavy Montez */
+:root {
+  --bg-primary: #FDF8F0;
+  --surface: rgb(253, 248, 240);
+  --footer-bg: rgb(74, 55, 40);
+  --footer-text-primary: rgb(193, 122, 72);
+  --footer-text-secondary: rgb(201, 195, 161);
+  --text-primary: #4A3728;
+  --accent: #C17A4D;
+  --secondary: #8BAA7B;
+  --border: #E6D5B8;
+  --card-bg: #FFFFFF;
+  --hero-bg: #EAE0D1;
+  --card-text-primary: rgb(74, 55, 68);
+  --card-text-secondary: rgb(172, 163, 156);
+}
+
+body.dark-mode {
+  --bg-primary: rgb(54, 36, 7);
+  --surface: rgb(54, 36, 8);
+  --footer-bg: rgb(24, 26, 27);
+  --footer-text-primary: rgb(232, 230, 227);
+  --footer-text-secondary: rgb(170, 169, 139);
+  --text-primary: rgb(209, 187, 170);
+  --accent: #D68C5C;
+  --secondary: #6B8F5E;
+  --border: rgb(97, 74, 34);
+  --card-bg: rgb(24, 26, 27);
+  --hero-bg: rgb(63, 49, 29);
+  --card-text-primary: rgb(209, 187, 170);
+  --card-text-secondary: rgb(110, 101, 93);
+}
+
+* {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
 
 body {
-  background-color: #FDF8F0;
-  color: #4A3728;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
   font-family: 'Inter', sans-serif;
 }
 
@@ -15,24 +50,18 @@ h1, h2, h3, .font-serif {
   height: 6px;
 }
 .custom-scrollbar::-webkit-scrollbar-track {
-  background: #FDF8F0;
+  background: var(--bg-primary);
 }
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background-color: #C17A4D;
+  background-color: var(--accent);
   border-radius: 10px;
 }
 
-/* Transiciones suaves para todos los elementos interactivos */
-button, 
-.category-btn, 
-.nav-link,
-.footer-link,
-.footer-contact,
-a[class*="hover:pl-"] {
+/* Transiciones */
+button, .category-btn, .nav-link, .footer-link, .footer-contact {
   transition: all 0.3s ease;
 }
 
-/* Efecto line-clamp para descripciones */
 .line-clamp-2 {
   display: -webkit-box;
   line-clamp: 2;
@@ -40,43 +69,102 @@ a[class*="hover:pl-"] {
   overflow: hidden;
 }
 
-/* Efecto hover en tarjetas de producto */
+/* Tarjetas de producto */
 .product-card {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  overflow: hidden;
 }
 .product-card:hover {
   transform: scale(1.02);
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
-
-/* Animación sutil para el marcador del mapa */
-.leaflet-marker-icon {
-  transition: transform 0.2s ease;
+.product-card h3 {
+  color: var(--card-text-primary);
 }
-.leaflet-marker-icon:hover {
-  transform: scale(1.1);
+.product-card p {
+  color: var(--card-text-secondary);
+}
+
+/* Mapa modo oscuro */
+.dark-mode .leaflet-tile-pane {
+  filter: brightness(0.7) invert(1) hue-rotate(180deg) contrast(0.9);
+}
+.dark-mode .leaflet-popup-content-wrapper,
+.dark-mode .leaflet-popup-tip {
+  background-color: var(--card-bg);
+  color: var(--text-primary);
 }
 
 /* Botón de filtro activo */
 .category-btn.active {
-  background-color: #C17A4D;
+  background-color: var(--accent);
   color: white;
-  border-color: #C17A4D;
+  border-color: var(--accent);
 }
 
-/* Efectos adicionales para enlaces del footer */
-.footer-link:hover,
-.footer-contact:hover {
-  opacity: 1;
-}
-
-.footer-contact {
+/* Botón de tema - modo claro: baja brillo, modo oscuro: sube brillo */
+#theme-toggle, #theme-toggle-mobile {
   transition: all 0.3s ease;
 }
+body:not(.dark-mode) #theme-toggle:hover,
+body:not(.dark-mode) #theme-toggle-mobile:hover {
+  filter: brightness(0.85);
+}
+body.dark-mode #theme-toggle:hover,
+body.dark-mode #theme-toggle-mobile:hover {
+  filter: brightness(1.2);
+}
 
-/* Asegurar que el navbar mantenga el texto centrado */
-nav {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+/* Botón de catálogo completo con desplazamiento hacia arriba */
+.btn-catalogo-completo {
+  transition: all 0.3s ease;
+}
+.btn-catalogo-completo:hover {
+  transform: translateY(-2px);
+}
+
+/* Estilos para footer centrado en móvil */
+@media (max-width: 768px) {
+  footer .grid {
+    text-align: center;
+  }
+  footer .flex.items-center {
+    justify-content: center;
+  }
+  footer .space-y-4 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  footer ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  footer .footer-contact,
+  footer .footer-link {
+    justify-content: center;
+  }
+}
+
+/* Iconos en navegación */
+.nav-link i {
+  margin-right: 6px;
+  font-size: 0.9rem;
+}
+
+/* Estados de navegación */
+.nav-link {
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+.nav-link.active {
+  opacity: 1;
+  font-weight: 600;
+}
+.nav-link:hover {
+  opacity: 1;
 }

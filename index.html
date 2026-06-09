@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Gavy Montez – Inicio</title>
+  <title>Inicio | Gavy Montez</title>
   
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -28,69 +28,70 @@
 </head>
 <body class="min-h-screen flex flex-col antialiased">
 
-  <header class="sticky top-0 z-40 bg-[#FDF8F0]/95 backdrop-blur-md border-b border-art-border shadow-sm">
+  <header class="sticky top-0 z-40 backdrop-blur-md border-b shadow-sm" style="background-color: var(--surface); border-color: var(--border);">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="h-20 flex items-center justify-between">
         
-        <a href="index.html" class="flex items-center gap-2 group flex-shrink-0">
-          <div class="w-10 h-10 rounded-full bg-art-accent flex items-center justify-center text-white text-xl font-serif">GM</div>
-          <span class="text-xl md:text-2xl font-serif font-bold text-art-text tracking-wide transition-colors group-hover:text-art-accent">Gavy Montez</span>
-        </a>
-
-        <!-- NAV CENTRADO -->
-        <nav class="hidden md:flex items-center justify-center flex-1 space-x-8">
-          <a href="index.html" class="nav-link text-art-text hover:text-art-accent font-medium text-base pb-1 border-b-2 border-art-accent transition-all duration-300 ease hover:pl-2">Inicio</a>
-          <a href="novedades.html" class="nav-link text-art-text hover:text-art-accent font-medium text-base pb-1 border-b-2 border-transparent transition-all duration-300 ease hover:pl-2">Novedades</a>
-          <a href="catalogo.html" class="nav-link text-art-text hover:text-art-accent font-medium text-base pb-1 border-b-2 border-transparent transition-all duration-300 ease hover:pl-2">Catálogo</a>
-          <a href="contacto.html" class="nav-link text-art-text hover:text-art-accent font-medium text-base pb-1 border-b-2 border-transparent transition-all duration-300 ease hover:pl-2">Contacto</a>
-        </nav>
-
-        <div class="hidden md:block flex-shrink-0">
-          <a href="novedades.html" class="bg-art-secondary hover:bg-[#79986A] text-white px-5 py-2.5 rounded-full font-medium transition-transform active:scale-95 text-sm flex items-center gap-2">
-            <i class="fa-solid fa-star"></i> Novedades
-          </a>
+        <!-- Botón menú hamburguesa (izquierda en móvil) -->
+        <div class="md:hidden flex items-center">
+          <button onclick="toggleMobileMenu()" class="focus:outline-none p-2" style="color: var(--text-primary);">
+            <i class="fa-solid fa-bars text-2xl"></i>
+          </button>
         </div>
 
-        <div class="md:hidden flex items-center">
-          <button onclick="toggleMobileMenu()" class="text-art-text hover:text-art-accent focus:outline-none p-2">
-            <i class="fa-solid fa-bars text-2xl"></i>
+        <!-- Logo -->
+        <a href="index.html" class="flex items-center gap-2 group flex-shrink-0 md:ml-0 ml-2">
+          <div class="w-10 h-10 rounded-full flex items-center justify-center text-white text-xl font-serif" style="background-color: var(--accent);">GM</div>
+          <span class="text-xl md:text-2xl font-serif font-bold tracking-wide" style="color: var(--text-primary);">Gavy Montez</span>
+        </a>
+
+        <!-- NAV CENTRADO (escritorio) -->
+        <nav class="hidden md:flex items-center justify-center flex-1 space-x-8">
+          <a href="index.html" class="nav-link active font-medium text-base transition-all duration-300" style="color: var(--text-primary);"><i class="fa-solid fa-house"></i> Inicio</a>
+          <a href="novedades.html" class="nav-link font-medium text-base transition-all duration-300" style="color: var(--text-primary);"><i class="fa-regular fa-star"></i> Novedades</a>
+          <a href="catalogo.html" class="nav-link font-medium text-base transition-all duration-300" style="color: var(--text-primary);"><i class="fa-regular fa-rectangle-list"></i> Catálogo</a>
+          <a href="contacto.html" class="nav-link font-medium text-base transition-all duration-300" style="color: var(--text-primary);"><i class="fa-regular fa-address-card"></i> Contacto</a>
+        </nav>
+
+        <!-- Botón tema oscuro (derecha) -->
+        <div class="flex items-center gap-3 flex-shrink-0">
+          <button id="theme-toggle" class="w-10 h-10 rounded-full transition-all duration-300 flex items-center justify-center" style="background-color: var(--surface); color: var(--accent); border: 1px solid var(--border);">
+            <i id="theme-icon" class="fa-regular fa-moon text-xl"></i>
           </button>
         </div>
       </div>
 
-      <div id="mobile-menu" class="hidden md:hidden bg-art-bg border-b border-art-border py-4 px-6 space-y-4 shadow-inner">
-        <a href="index.html" class="block w-full text-left font-serif text-lg text-art-text hover:text-art-accent py-2 border-b border-art-border/50">Inicio</a>
-        <a href="novedades.html" class="block w-full text-left font-serif text-lg text-art-text hover:text-art-accent py-2 border-b border-art-border/50">Novedades</a>
-        <a href="catalogo.html" class="block w-full text-left font-serif text-lg text-art-text hover:text-art-accent py-2 border-b border-art-border/50">Catálogo</a>
-        <a href="contacto.html" class="block w-full text-left font-serif text-lg text-art-text hover:text-art-accent py-2">Contacto</a>
-        <div class="pt-2">
-          <a href="novedades.html" class="w-full bg-art-accent text-white py-3 rounded-xl font-medium text-center block">Ver Novedades</a>
-        </div>
+      <!-- Mobile menu (sin botón "Ver Novedades") -->
+      <div id="mobile-menu" class="hidden md:hidden py-4 px-6 space-y-4 shadow-inner" style="background-color: var(--surface); border-color: var(--border);">
+        <a href="index.html" class="flex items-center gap-2 w-full text-left font-serif text-lg py-2 border-b" style="color: var(--text-primary); border-color: var(--border);"><i class="fa-solid fa-house"></i> Inicio</a>
+        <a href="novedades.html" class="flex items-center gap-2 w-full text-left font-serif text-lg py-2 border-b" style="color: var(--text-primary); border-color: var(--border);"><i class="fa-regular fa-star"></i> Novedades</a>
+        <a href="catalogo.html" class="flex items-center gap-2 w-full text-left font-serif text-lg py-2 border-b" style="color: var(--text-primary); border-color: var(--border);"><i class="fa-regular fa-rectangle-list"></i> Catálogo</a>
+        <a href="contacto.html" class="flex items-center gap-2 w-full text-left font-serif text-lg py-2" style="color: var(--text-primary);"><i class="fa-regular fa-address-card"></i> Contacto</a>
       </div>
     </div>
   </header>
 
   <main class="flex-grow">
-    <div class="relative bg-[#EAE0D1] overflow-hidden py-16 md:py-24">
-      <div class="absolute -top-12 -left-12 w-48 h-48 rounded-full bg-art-border opacity-30 blur-xl"></div>
-      <div class="absolute bottom-0 right-10 w-72 h-72 rounded-full bg-art-secondary opacity-15 blur-2xl"></div>
+    <div class="relative overflow-hidden py-16 md:py-24" style="background-color: var(--hero-bg);">
+      <div class="absolute -top-12 -left-12 w-48 h-48 rounded-full opacity-30 blur-xl" style="background-color: var(--border);"></div>
+      <div class="absolute bottom-0 right-10 w-72 h-72 rounded-full opacity-15 blur-2xl" style="background-color: var(--secondary);"></div>
       
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           
           <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
-            <h1 class="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-art-text leading-tight">
-              <span class="italic text-art-accent underline decoration-art-border">Gavy Montez</span><br>Creaciones hechas a mano con Amor
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-serif font-bold leading-tight" style="color: var(--text-primary);">
+              <span class="italic underline" style="color: var(--accent);">Gavy Montez</span><br>Creaciones hechas a mano con Amor
             </h1>
-            <p class="text-lg md:text-xl text-art-text/80 max-w-xl mx-auto lg:mx-0 font-light leading-relaxed">
+            <p class="text-lg md:text-xl max-w-xl mx-auto lg:mx-0 font-light leading-relaxed" style="color: var(--text-primary); opacity: 0.8;">
               Pulseras, atrapasueños, sombreros y esculturas pintadas. Cada pieza es única, tejida y moldeada con esencia caribeña desde La Habana.
             </p>
             
             <div class="pt-4 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <a href="catalogo.html" class="bg-art-accent hover:bg-art-hover text-white text-base font-semibold px-8 py-4 rounded-full transition-all duration-300 transform hover:-translate-y-0.5 shadow-lg shadow-art-accent/20 flex items-center justify-center gap-2">
+              <a href="catalogo.html" class="text-white text-base font-semibold px-8 py-4 rounded-full transition-all duration-300 transform hover:-translate-y-0.5 shadow-lg flex items-center justify-center gap-2" style="background-color: var(--accent);">
                 Ver colección <i class="fa-solid fa-arrow-right"></i>
               </a>
-              <button onclick="scrollToFeatured()" class="bg-transparent border-2 border-art-text/20 hover:border-art-accent text-art-text hover:text-art-accent text-base font-medium px-6 py-4 rounded-full transition-all duration-300">
+              <button onclick="scrollToFeatured()" class="bg-transparent border-2 text-base font-medium px-6 py-4 rounded-full transition-all duration-300" style="border-color: var(--border); color: var(--text-primary);">
                 Conocer más
               </button>
             </div>
@@ -98,14 +99,14 @@
 
           <div class="lg:col-span-5 relative">
             <div class="relative mx-auto max-w-[400px] lg:max-w-none">
-              <div class="absolute inset-0 bg-art-accent rounded-3xl rotate-3 scale-102 opacity-10"></div>
+              <div class="absolute inset-0 rounded-3xl rotate-3 scale-102 opacity-10" style="background-color: var(--accent);"></div>
               <img src="https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&q=80&w=800" alt="Artesana Gavy Montez tejiendo con amor" class="rounded-3xl shadow-xl border-4 border-white object-cover w-full h-[350px] md:h-[450px] relative z-10" />
-              <div class="absolute -bottom-6 -left-6 bg-white p-4 rounded-2xl shadow-lg border border-art-border max-w-[200px] z-20 hidden sm:block">
+              <div class="absolute -bottom-6 -left-6 p-4 rounded-2xl shadow-lg max-w-[200px] z-20 hidden sm:block" style="background-color: var(--card-bg); border-color: var(--border);">
                 <div class="flex items-center gap-3">
-                  <span class="text-3xl text-art-accent"><i class="fa-solid fa-heart"></i></span>
+                  <span class="text-3xl" style="color: var(--accent);"><i class="fa-solid fa-heart"></i></span>
                   <div>
-                    <p class="text-xs font-bold uppercase text-art-accent">Esencia única</p>
-                    <p class="text-[10px] text-art-text/70">Hecho con amor en cada puntada.</p>
+                    <p class="text-xs font-bold uppercase" style="color: var(--accent);">Esencia única</p>
+                    <p class="text-[10px]" style="color: var(--text-primary); opacity: 0.7;">Hecho con amor en cada puntada.</p>
                   </div>
                 </div>
               </div>
@@ -115,77 +116,117 @@
       </div>
     </div>
 
-    <section class="py-16 bg-white border-y border-art-border/30">
+    <section class="py-16 border-y" style="background-color: var(--card-bg); border-color: var(--border);">
       <div class="max-w-5xl mx-auto px-4 text-center space-y-6">
-        <h2 class="text-3xl md:text-4xl font-serif font-bold text-art-text">El valor de lo hecho a mano con amor</h2>
-        <div class="w-24 h-1 bg-art-accent mx-auto rounded-full"></div>
-        <p class="text-lg text-art-text/80 max-w-3xl mx-auto leading-relaxed">
+        <h2 class="text-3xl md:text-4xl font-serif font-bold" style="color: var(--text-primary);">El valor de lo hecho a mano con amor</h2>
+        <div class="w-24 h-1 mx-auto rounded-full" style="background-color: var(--accent);"></div>
+        <p class="text-lg max-w-3xl mx-auto leading-relaxed" style="color: var(--text-primary); opacity: 0.8;">
           En el taller de Gavy Montez, seleccionamos hilos de algodón, maderas nobles y pigmentos naturales. Cada creación es un reflejo de nuestra pasión por la artesanía cubana, con esmero y cariño. No hay dos iguales.
         </p>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-6 pt-8">
-          <div class="p-4 rounded-2xl bg-art-bg border border-art-border/40"><span class="block text-2xl text-art-accent mb-1"><i class="fa-solid fa-leaf"></i></span><h3 class="font-bold text-sm text-art-text">Materiales Eco</h3></div>
-          <div class="p-4 rounded-2xl bg-art-bg border border-art-border/40"><span class="block text-2xl text-art-accent mb-1"><i class="fa-solid fa-truck-fast"></i></span><h3 class="font-bold text-sm text-art-text">Envíos Seguros</h3></div>
-          <div class="p-4 rounded-2xl bg-art-bg border border-art-border/40"><span class="block text-2xl text-art-accent mb-1"><i class="fa-solid fa-wand-magic-sparkles"></i></span><h3 class="font-bold text-sm text-art-text">Diseños Únicos</h3></div>
-          <div class="p-4 rounded-2xl bg-art-bg border border-art-border/40"><span class="block text-2xl text-art-accent mb-1"><i class="fa-brands fa-whatsapp"></i></span><h3 class="font-bold text-sm text-art-text">Trato Directo</h3></div>
+          <div class="p-4 rounded-2xl border" style="background-color: var(--bg-primary); border-color: var(--border);"><span class="block text-2xl mb-1" style="color: var(--accent);"><i class="fa-solid fa-leaf"></i></span><h3 class="font-bold text-sm" style="color: var(--text-primary);">Materiales Eco</h3></div>
+          <div class="p-4 rounded-2xl border" style="background-color: var(--bg-primary); border-color: var(--border);"><span class="block text-2xl mb-1" style="color: var(--accent);"><i class="fa-solid fa-truck-fast"></i></span><h3 class="font-bold text-sm" style="color: var(--text-primary);">Envíos Seguros</h3></div>
+          <div class="p-4 rounded-2xl border" style="background-color: var(--bg-primary); border-color: var(--border);"><span class="block text-2xl mb-1" style="color: var(--accent);"><i class="fa-solid fa-wand-magic-sparkles"></i></span><h3 class="font-bold text-sm" style="color: var(--text-primary);">Diseños Únicos</h3></div>
+          <div class="p-4 rounded-2xl border" style="background-color: var(--bg-primary); border-color: var(--border);"><span class="block text-2xl mb-1" style="color: var(--accent);"><i class="fa-brands fa-whatsapp"></i></span><h3 class="font-bold text-sm" style="color: var(--text-primary);">Trato Directo</h3></div>
         </div>
       </div>
     </section>
 
     <section id="featured-products" class="py-16 md:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-4">
-        <div><span class="text-art-accent uppercase tracking-widest text-xs font-bold">Favoritos del taller</span><h2 class="text-3xl md:text-4xl font-serif font-bold text-art-text mt-1">Creaciones destacadas</h2></div>
-        <a href="catalogo.html" class="text-art-accent hover:text-art-hover font-semibold flex items-center gap-2 group transition-all duration-300 ease hover:pl-2">Ver todo el catálogo <i class="fa-solid fa-arrow-right transform group-hover:translate-x-1 transition-transform"></i></a>
+        <div><span class="uppercase tracking-widest text-xs font-bold" style="color: var(--accent);">Favoritos del taller</span><h2 class="text-3xl md:text-4xl font-serif font-bold mt-1" style="color: var(--text-primary);">Creaciones destacadas</h2></div>
+        <a href="catalogo.html" class="font-semibold flex items-center gap-2 group transition-all duration-300" style="color: var(--accent);">Ver todo el catálogo <i class="fa-solid fa-arrow-right transform group-hover:translate-x-1 transition-transform"></i></a>
       </div>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8" id="featured-grid"></div>
-      <div class="mt-16 text-center"><a href="catalogo.html" class="inline-block bg-art-accent hover:bg-art-hover text-white text-base font-semibold px-8 py-4 rounded-full transition-all shadow-md">Ver catálogo completo</a></div>
+      <div class="mt-16 text-center">
+        <a href="catalogo.html" class="btn-catalogo-completo text-white text-base font-semibold px-8 py-4 rounded-full transition-all shadow-md inline-block" style="background-color: var(--accent);">Ver catálogo completo</a>
+      </div>
     </section>
   </main>
 
-  <!-- FOOTER unificado -->
-  <footer class="bg-art-text text-white py-12 border-t border-art-border/20">
+  <!-- FOOTER centrado en móvil -->
+  <footer class="py-12 border-t" style="background-color: var(--footer-bg); border-color: var(--border);">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 pb-8 border-b border-white/10">
-        <div class="space-y-4">
-          <div class="flex items-center gap-2"><div class="w-8 h-8 rounded-full bg-art-accent flex items-center justify-center text-white text-base font-serif">GM</div><span class="text-lg font-serif font-bold tracking-wide">Gavy Montez</span></div>
-          <p class="text-sm text-white/70 max-w-sm">Creaciones hechas a mano con Amor. Cada puntada, cada pincelada, lleva esencia cubana.</p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 pb-8 border-b text-center md:text-left" style="border-color: rgba(255,255,255,0.1);">
+        <div class="space-y-4 flex flex-col items-center md:items-start">
+          <div class="flex items-center gap-2 justify-center md:justify-start"><div class="w-8 h-8 rounded-full flex items-center justify-center text-white text-base font-serif" style="background-color: var(--accent);">GM</div><span class="text-lg font-serif font-bold tracking-wide text-white">Gavy Montez</span></div>
+          <p class="text-sm text-white/70 max-w-sm text-center md:text-left">Creaciones hechas a mano con Amor. Cada puntada, cada pincelada, lleva esencia cubana.</p>
         </div>
-        <div class="space-y-4">
-          <h4 class="text-sm font-semibold uppercase tracking-wider text-art-accent">Navegación</h4>
-          <ul class="space-y-2 text-sm">
-            <li><a href="index.html" class="footer-link text-white/70 hover:text-white transition-all duration-300 ease hover:pl-2">Inicio</a></li>
-            <li><a href="novedades.html" class="footer-link text-white/70 hover:text-white transition-all duration-300 ease hover:pl-2">Novedades</a></li>
-            <li><a href="catalogo.html" class="footer-link text-white/70 hover:text-white transition-all duration-300 ease hover:pl-2">Catálogo Completo</a></li>
-            <li><a href="contacto.html" class="footer-link text-white/70 hover:text-white transition-all duration-300 ease hover:pl-2">Ubicación y Contacto</a></li>
+        <div class="space-y-4 flex flex-col items-center md:items-start">
+          <h4 class="text-sm font-semibold uppercase tracking-wider text-center md:text-left" style="color: var(--footer-text-primary);">Navegación</h4>
+          <ul class="space-y-2 text-sm text-center md:text-left">
+            <li><a href="index.html" class="footer-link transition-all duration-300" style="color: var(--footer-text-secondary);">Inicio</a></li>
+            <li><a href="novedades.html" class="footer-link transition-all duration-300" style="color: var(--footer-text-secondary);">Novedades</a></li>
+            <li><a href="catalogo.html" class="footer-link transition-all duration-300" style="color: var(--footer-text-secondary);">Catálogo Completo</a></li>
+            <li><a href="contacto.html" class="footer-link transition-all duration-300" style="color: var(--footer-text-secondary);">Ubicación y Contacto</a></li>
           </ul>
         </div>
-        <div class="space-y-4">
-          <h4 class="text-sm font-semibold uppercase tracking-wider text-art-accent">Canales</h4>
-          <ul class="space-y-2 text-sm">
-            <li><a href="https://wa.me/5358481876" target="_blank" class="footer-contact text-white/70 hover:text-white transition-all duration-300 ease hover:pl-2 flex items-center gap-2"><i class="fa-brands fa-whatsapp text-art-accent"></i> +53 58481876</a></li>
-            <li><a href="https://instagram.com/gavymontez_creaciones" target="_blank" class="footer-contact text-white/70 hover:text-white transition-all duration-300 ease hover:pl-2 flex items-center gap-2"><i class="fa-brands fa-instagram text-art-accent"></i> @gavymontez_creaciones</a></li>
-            <li class="flex items-center gap-2 text-white/70"><i class="fa-solid fa-location-dot text-art-accent"></i> La Lisa, La Habana, Cuba</li>
+        <div class="space-y-4 flex flex-col items-center md:items-start">
+          <h4 class="text-sm font-semibold uppercase tracking-wider text-center md:text-left" style="color: var(--footer-text-primary);">Canales</h4>
+          <ul class="space-y-2 text-sm text-center md:text-left">
+            <li><a href="https://wa.me/5358481876" target="_blank" class="footer-contact transition-all duration-300 flex items-center gap-2 justify-center md:justify-start" style="color: var(--footer-text-secondary);"><i class="fa-brands fa-whatsapp" style="color: var(--accent);"></i> +53 58481876</a></li>
+            <li><a href="https://instagram.com/gavymontez_creaciones" target="_blank" class="footer-contact transition-all duration-300 flex items-center gap-2 justify-center md:justify-start" style="color: var(--footer-text-secondary);"><i class="fa-brands fa-instagram" style="color: var(--accent);"></i> @gavymontez_creaciones</a></li>
+            <li class="flex items-center gap-2 justify-center md:justify-start" style="color: var(--footer-text-secondary);"><i class="fa-solid fa-location-dot" style="color: var(--accent);"></i> La Lisa, La Habana, Cuba</li>
           </ul>
         </div>
       </div>
-      <div class="pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-white/50 gap-4">
+      <div class="pt-8 flex flex-col md:flex-row justify-between items-center text-xs gap-4 text-center" style="color: var(--footer-text-secondary); opacity: 0.7;">
         <p>© 2025 Gavy Montez · Creaciones hechas a mano con Amor.</p>
-        <p class="flex items-center gap-4"><span>Prototipo interactivo</span><span class="w-1.5 h-1.5 rounded-full bg-green-400"></span><span>WhatsApp Activo</span></p>
+        <p class="flex items-center gap-4 justify-center"><span>Prototipo interactivo</span><span class="w-1.5 h-1.5 rounded-full bg-green-400"></span><span>WhatsApp Activo</span></p>
       </div>
     </div>
   </footer>
 
-  <a href="https://wa.me/5358481876?text=Hola%20Gavy%20Montez!%20Vengo%20desde%20su%20web%20cat%C3%A1logo%20y%20me%20encant%C3%B3%20una%20de%20sus%20creaciones" target="_blank" class="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white w-14 h-14 rounded-full flex items-center justify-center text-3xl shadow-xl hover:bg-[#20ba5a] hover:scale-110 transition-all group"><i class="fa-brands fa-whatsapp"></i><span class="absolute right-16 bg-art-text text-white text-xs px-3 py-1.5 rounded-lg shadow-md whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">¿Dudas? Chatea con Gavy</span></a>
+  <a href="https://wa.me/5358481876?text=Hola%20Gavy%20Montez!%20Vengo%20desde%20su%20web%20cat%C3%A1logo%20y%20me%20encant%C3%B3%20una%20de%20sus%20creaciones" target="_blank" class="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white w-14 h-14 rounded-full flex items-center justify-center text-3xl shadow-xl hover:bg-[#20ba5a] hover:scale-110 transition-all group"><i class="fa-brands fa-whatsapp"></i><span class="absolute right-16 px-3 py-1.5 rounded-lg shadow-md whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" style="background-color: var(--text-primary); color: var(--bg-primary);">¿Dudas? Chatea con Gavy</span></a>
 
   <div id="prototipo-info-modal" class="hidden fixed inset-0 z-50 overflow-y-auto bg-black/60 flex items-center justify-center p-4">
-    <div class="bg-white rounded-3xl p-6 md:p-8 max-w-2xl w-full border border-art-border shadow-2xl relative"><button onclick="document.getElementById('prototipo-info-modal').classList.add('hidden')" class="absolute top-4 right-4 text-art-text/60 hover:text-art-accent text-xl"><i class="fa-solid fa-xmark"></i></button><div class="space-y-6"><div class="flex items-center gap-3"><span class="text-3xl text-art-accent"><i class="fa-solid fa-circle-question"></i></span><h2 class="text-2xl font-serif font-bold text-art-text">Guía Gavy Montez</h2></div><div class="space-y-4 text-sm text-art-text/80"><p>Catálogo artesanal interactivo. Filtros funcionales, WhatsApp real (+53 58481876), Instagram @gavymontez_creaciones.</p><div class="border-l-4 border-art-accent pl-4 space-y-2"><p>📌 <strong>Responsive:</strong> Prueba en móvil o escritorio.</p><p>📌 <strong>Filtros por categorías</strong> en Catálogo.</p><p>📌 <strong>WhatsApp integrado:</strong> mensaje automático.</p></div></div><button onclick="document.getElementById('prototipo-info-modal').classList.add('hidden')" class="w-full bg-art-accent text-white py-3 rounded-xl font-bold">Entendido</button></div></div>
+    <div class="rounded-3xl p-6 md:p-8 max-w-2xl w-full shadow-2xl relative" style="background-color: var(--card-bg); border-color: var(--border);"><button onclick="document.getElementById('prototipo-info-modal').classList.add('hidden')" class="absolute top-4 right-4 text-xl" style="color: var(--text-primary);"><i class="fa-solid fa-xmark"></i></button><div class="space-y-6"><div class="flex items-center gap-3"><span class="text-3xl" style="color: var(--accent);"><i class="fa-solid fa-circle-question"></i></span><h2 class="text-2xl font-serif font-bold" style="color: var(--text-primary);">Guía Gavy Montez</h2></div><div class="space-y-4 text-sm" style="color: var(--text-primary); opacity: 0.8;"><p>Catálogo artesanal interactivo. Filtros funcionales, WhatsApp real (+53 58481876), Instagram @gavymontez_creaciones.</p><div class="border-l-4 pl-4 space-y-2" style="border-color: var(--accent);"><p>📌 <strong>Responsive:</strong> Prueba en móvil o escritorio.</p><p>📌 <strong>Filtros por categorías</strong> en Catálogo.</p><p>📌 <strong>WhatsApp integrado:</strong> mensaje automático.</p></div></div><button onclick="document.getElementById('prototipo-info-modal').classList.add('hidden')" class="w-full text-white py-3 rounded-xl font-bold" style="background-color: var(--accent);">Entendido</button></div></div>
   </div>
 
-  <script src="js/data.js"></script>
-  <script src="js/ui.js"></script>
-  <script src="js/main.js"></script>
   <script>
+    function initTheme() {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'dark') {
+        document.body.classList.add('dark-mode');
+        updateThemeIcons('dark');
+      } else {
+        document.body.classList.remove('dark-mode');
+        updateThemeIcons('light');
+      }
+    }
+    function updateThemeIcons(theme) {
+      const icons = document.querySelectorAll('#theme-icon, #theme-icon-mobile');
+      icons.forEach(icon => {
+        if (theme === 'dark') {
+          icon.className = 'fa-regular fa-sun text-xl';
+        } else {
+          icon.className = 'fa-regular fa-moon text-xl';
+        }
+      });
+    }
+    function toggleTheme() {
+      if (document.body.classList.contains('dark-mode')) {
+        document.body.classList.remove('dark-mode');
+        localStorage.setItem('theme', 'light');
+        updateThemeIcons('light');
+      } else {
+        document.body.classList.add('dark-mode');
+        localStorage.setItem('theme', 'dark');
+        updateThemeIcons('dark');
+      }
+    }
+    document.addEventListener('DOMContentLoaded', function() {
+      initTheme();
+      const themeToggle = document.getElementById('theme-toggle');
+      const themeToggleMobile = document.getElementById('theme-toggle-mobile');
+      if (themeToggle) themeToggle.addEventListener('click', toggleTheme);
+      if (themeToggleMobile) themeToggleMobile.addEventListener('click', toggleTheme);
+    });
     function toggleMobileMenu() { document.getElementById('mobile-menu').classList.toggle('hidden'); }
     function scrollToFeatured() { document.getElementById('featured-products').scrollIntoView({ behavior: 'smooth' }); }
   </script>
+  <script src="js/data.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>
