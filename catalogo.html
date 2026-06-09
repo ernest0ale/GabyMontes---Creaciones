@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Gavy Montez – Catálogo</title>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/styles.css">
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'art-bg': '#FDF8F0', 'art-text': '#4A3728', 'art-accent': '#C17A4D',
+            'art-secondary': '#8BAA7B', 'art-border': '#E6D5B8', 'art-hover': '#B06B40',
+          },
+          fontFamily: { serif: ['"Playfair Display"', 'serif'], sans: ['Inter', 'sans-serif'] }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="min-h-screen flex flex-col antialiased">
+
+  <header class="sticky top-0 z-40 bg-[#FDF8F0]/95 backdrop-blur-md border-b border-art-border shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="h-20 flex items-center justify-between">
+        
+        <a href="index.html" class="flex items-center gap-2 group flex-shrink-0">
+          <div class="w-10 h-10 rounded-full bg-art-accent flex items-center justify-center text-white text-xl font-serif">GM</div>
+          <span class="text-xl md:text-2xl font-serif font-bold text-art-text tracking-wide transition-colors group-hover:text-art-accent">Gavy Montez</span>
+        </a>
+
+        <nav class="hidden md:flex items-center justify-center flex-1 space-x-8">
+          <a href="index.html" class="nav-link text-art-text hover:text-art-accent font-medium text-base pb-1 border-b-2 border-transparent transition-all duration-300 ease hover:pl-2">Inicio</a>
+          <a href="novedades.html" class="nav-link text-art-text hover:text-art-accent font-medium text-base pb-1 border-b-2 border-transparent transition-all duration-300 ease hover:pl-2">Novedades</a>
+          <a href="catalogo.html" class="nav-link text-art-accent border-b-2 border-art-accent font-medium text-base pb-1 transition-all duration-300 ease hover:pl-2">Catálogo</a>
+          <a href="contacto.html" class="nav-link text-art-text hover:text-art-accent font-medium text-base pb-1 border-b-2 border-transparent transition-all duration-300 ease hover:pl-2">Contacto</a>
+        </nav>
+
+        <div class="hidden md:block flex-shrink-0">
+          <a href="novedades.html" class="bg-art-secondary hover:bg-[#79986A] text-white px-5 py-2.5 rounded-full font-medium transition-transform active:scale-95 text-sm flex items-center gap-2">
+            <i class="fa-solid fa-star"></i> Novedades
+          </a>
+        </div>
+
+        <div class="md:hidden flex items-center">
+          <button onclick="toggleMobileMenu()" class="text-art-text hover:text-art-accent focus:outline-none p-2">
+            <i class="fa-solid fa-bars text-2xl"></i>
+          </button>
+        </div>
+      </div>
+
+      <div id="mobile-menu" class="hidden md:hidden bg-art-bg border-b border-art-border py-4 px-6 space-y-4 shadow-inner">
+        <a href="index.html" class="block w-full text-left font-serif text-lg text-art-text hover:text-art-accent py-2 border-b border-art-border/50">Inicio</a>
+        <a href="novedades.html" class="block w-full text-left font-serif text-lg text-art-text hover:text-art-accent py-2 border-b border-art-border/50">Novedades</a>
+        <a href="catalogo.html" class="block w-full text-left font-serif text-lg text-art-text hover:text-art-accent py-2 border-b border-art-border/50">Catálogo</a>
+        <a href="contacto.html" class="block w-full text-left font-serif text-lg text-art-text hover:text-art-accent py-2">Contacto</a>
+        <div class="pt-2">
+          <a href="novedades.html" class="w-full bg-art-accent text-white py-3 rounded-xl font-medium text-center block">Ver Novedades</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="flex-grow py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <span class="text-art-accent uppercase tracking-widest text-xs font-bold">Colección Gavy Montez</span>
+        <h1 class="text-4xl font-serif font-bold text-art-text mt-1">Piezas únicas, hechas con amor</h1>
+        <p class="text-art-text/70 mt-3">Filtra por categoría. Mostrando 12 productos por página.</p>
+      </div>
+
+      <div class="flex flex-wrap justify-center gap-3 mb-10" id="category-filters">
+        <button onclick="filterCategory('todos')" data-cat="todos" class="category-btn active px-5 py-2.5 rounded-full text-sm transition-all border border-art-accent bg-art-accent text-white">⭐ Todos</button>
+        <button onclick="filterCategory('pulseras')" data-cat="pulseras" class="category-btn px-5 py-2.5 rounded-full text-sm border border-art-border bg-white text-art-text">📿 Pulseras</button>
+        <button onclick="filterCategory('atrapasuenos')" data-cat="atrapasuenos" class="category-btn px-5 py-2.5 rounded-full text-sm border border-art-border bg-white text-art-text">🕸️ Atrapasueños</button>
+        <button onclick="filterCategory('esculturas')" data-cat="esculturas" class="category-btn px-5 py-2.5 rounded-full text-sm border border-art-border bg-white text-art-text">🏺 Esculturas</button>
+        <button onclick="filterCategory('sombreros')" data-cat="sombreros" class="category-btn px-5 py-2.5 rounded-full text-sm border border-art-border bg-white text-art-text">🎓 Sombreros</button>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8" id="catalogo-grid"></div>
+      
+      <!-- PAGINADO -->
+      <div id="pagination-container" class="flex justify-center items-center gap-4 mt-12">
+        <button id="prev-page-btn" class="px-4 py-2 rounded-full border border-art-border bg-white text-art-text hover:bg-art-accent hover:text-white transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:text-art-text">
+          <i class="fa-solid fa-chevron-left"></i> Anterior
+        </button>
+        <div class="flex items-center gap-2">
+          <span class="text-art-text/70 text-sm">Página</span>
+          <input type="number" id="page-input" min="1" class="w-16 text-center px-2 py-1 rounded-md border border-art-border bg-white text-art-text font-medium">
+          <span class="text-art-text/70 text-sm">de <span id="total-pages">1</span></span>
+        </div>
+        <button id="next-page-btn" class="px-4 py-2 rounded-full border border-art-border bg-white text-art-text hover:bg-art-accent hover:text-white transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:text-art-text">
+          Siguiente <i class="fa-solid fa-chevron-right"></i>
+        </button>
+      </div>
+      
+      <div id="empty-catalog-state" class="hidden text-center py-16"><p class="text-lg text-art-text/70">No hay productos en esta categoría.</p><button onclick="filterCategory('todos')" class="mt-4 bg-art-accent text-white px-6 py-2 rounded-full">Mostrar todos</button></div>
+    </div>
+  </main>
+
+  <!-- FOOTER unificado -->
+  <footer class="bg-art-text text-white py-12 border-t border-art-border/20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 pb-8 border-b border-white/10">
+        <div class="space-y-4"><div class="flex items-center gap-2"><div class="w-8 h-8 rounded-full bg-art-accent flex items-center justify-center text-white text-base font-serif">GM</div><span class="text-lg font-serif font-bold tracking-wide">Gavy Montez</span></div><p class="text-sm text-white/70 max-w-sm">Creaciones hechas a mano con Amor. Cada puntada, cada pincelada, lleva esencia cubana.</p></div>
+        <div class="space-y-4"><h4 class="text-sm font-semibold uppercase tracking-wider text-art-accent">Navegación</h4><ul class="space-y-2 text-sm"><li><a href="index.html" class="footer-link text-white/70 hover:text-white transition-all duration-300 ease hover:pl-2">Inicio</a></li><li><a href="novedades.html" class="footer-link text-white/70 hover:text-white transition-all duration-300 ease hover:pl-2">Novedades</a></li><li><a href="catalogo.html" class="footer-link text-white/70 hover:text-white transition-all duration-300 ease hover:pl-2">Catálogo Completo</a></li><li><a href="contacto.html" class="footer-link text-white/70 hover:text-white transition-all duration-300 ease hover:pl-2">Ubicación y Contacto</a></li></ul></div>
+        <div class="space-y-4"><h4 class="text-sm font-semibold uppercase tracking-wider text-art-accent">Canales</h4><ul class="space-y-2 text-sm"><li><a href="https://wa.me/5358481876" target="_blank" class="footer-contact text-white/70 hover:text-white transition-all duration-300 ease hover:pl-2 flex items-center gap-2"><i class="fa-brands fa-whatsapp text-art-accent"></i> +53 58481876</a></li><li><a href="https://instagram.com/gavymontez_creaciones" target="_blank" class="footer-contact text-white/70 hover:text-white transition-all duration-300 ease hover:pl-2 flex items-center gap-2"><i class="fa-brands fa-instagram text-art-accent"></i> @gavymontez_creaciones</a></li><li class="flex items-center gap-2 text-white/70"><i class="fa-solid fa-location-dot text-art-accent"></i> La Lisa, La Habana, Cuba</li></ul></div>
+      </div>
+      <div class="pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-white/50 gap-4"><p>© 2025 Gavy Montez · Creaciones hechas a mano con Amor.</p><p class="flex items-center gap-4"><span>Prototipo interactivo</span><span class="w-1.5 h-1.5 rounded-full bg-green-400"></span><span>WhatsApp Activo</span></p></div>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/5358481876" target="_blank" class="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white w-14 h-14 rounded-full flex items-center justify-center text-3xl shadow-xl hover:scale-110 transition"><i class="fa-brands fa-whatsapp"></i></a>
+
+  <script src="js/data.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    function toggleMobileMenu() { document.getElementById('mobile-menu').classList.toggle('hidden'); }
+    
+    // Variables para paginado
+    let currentPage = 1;
+    let itemsPerPage = 12;
+    let currentFilteredProducts = [...productos];
+    
+    function renderCatalogoConPaginado() {
+      const startIndex = (currentPage - 1) * itemsPerPage;
+      const endIndex = startIndex + itemsPerPage;
+      const productosPagina = currentFilteredProducts.slice(startIndex, endIndex);
+      const totalPages = Math.ceil(currentFilteredProducts.length / itemsPerPage);
+      
+      // Renderizar grid
+      const grid = document.getElementById('catalogo-grid');
+      const emptyState = document.getElementById('empty-catalog-state');
+      const paginationContainer = document.getElementById('pagination-container');
+      
+      if (productosPagina.length === 0 && currentFilteredProducts.length === 0) {
+        grid.classList.add('hidden');
+        emptyState.classList.remove('hidden');
+        paginationContainer.classList.add('hidden');
+        return;
+      }
+      
+      grid.classList.remove('hidden');
+      emptyState.classList.add('hidden');
+      paginationContainer.classList.remove('hidden');
+      
+      grid.innerHTML = '';
+      productosPagina.forEach(p => grid.appendChild(createProductCard(p)));
+      
+      // Actualizar controles de paginado
+      const prevBtn = document.getElementById('prev-page-btn');
+      const nextBtn = document.getElementById('next-page-btn');
+      const pageInput = document.getElementById('page-input');
+      const totalPagesSpan = document.getElementById('total-pages');
+      
+      pageInput.value = currentPage;
+      totalPagesSpan.textContent = totalPages;
+      
+      prevBtn.disabled = currentPage === 1;
+      nextBtn.disabled = currentPage === totalPages || totalPages === 0;
+      
+      // Validar input
+      if (currentPage > totalPages && totalPages > 0) {
+        currentPage = totalPages;
+        renderCatalogoConPaginado();
+      }
+    }
+    
+    // Sobrescribir filterCategory
+    const originalFilterCategory = window.filterCategory;
+    window.filterCategory = function(catId) {
+      document.querySelectorAll('#category-filters .category-btn').forEach(btn => {
+        btn.classList.remove('active', 'bg-art-accent', 'text-white', 'border-art-accent');
+        btn.classList.add('bg-white', 'text-art-text', 'border-art-border');
+      });
+      const activeBtn = document.querySelector(`#category-filters [data-cat="${catId}"]`);
+      if (activeBtn) {
+        activeBtn.classList.remove('bg-white', 'text-art-text', 'border-art-border');
+        activeBtn.classList.add('active', 'bg-art-accent', 'text-white', 'border-art-accent');
+      }
+      
+      currentFilteredProducts = catId === 'todos' ? [...productos] : productos.filter(p => p.categoria === catId);
+      currentPage = 1;
+      renderCatalogoConPaginado();
+    };
+    
+    document.addEventListener('DOMContentLoaded', function() {
+      currentFilteredProducts = [...productos];
+      renderCatalogoConPaginado();
+      
+      // Eventos de paginado
+      const prevBtn = document.getElementById('prev-page-btn');
+      const nextBtn = document.getElementById('next-page-btn');
+      const pageInput = document.getElementById('page-input');
+      
+      prevBtn.addEventListener('click', function() {
+        if (currentPage > 1) {
+          currentPage--;
+          renderCatalogoConPaginado();
+        }
+      });
+      
+      nextBtn.addEventListener('click', function() {
+        const totalPages = Math.ceil(currentFilteredProducts.length / itemsPerPage);
+        if (currentPage < totalPages) {
+          currentPage++;
+          renderCatalogoConPaginado();
+        }
+      });
+      
+      pageInput.addEventListener('change', function() {
+        let newPage = parseInt(this.value);
+        const totalPages = Math.ceil(currentFilteredProducts.length / itemsPerPage);
+        if (isNaN(newPage)) newPage = 1;
+        if (newPage < 1) newPage = 1;
+        if (newPage > totalPages && totalPages > 0) newPage = totalPages;
+        currentPage = newPage;
+        renderCatalogoConPaginado();
+      });
+    });
+  </script>
+</body>
+</html>
